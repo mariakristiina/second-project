@@ -48,8 +48,7 @@ User.deleteMany()
   })
 
 // seeds for food trucks
-const truckSeeds = {
-  {
+const truckSeeds = [{
     name: "Zwei Dicke Bärren",
     owner: null,
     cuisine: null,
@@ -88,5 +87,40 @@ const truckSeeds = {
     rating: 8,
     menu: null,
     hours: [18, 22]
+  },
+  {
+    name: "Maria Maria Arepas",
+    owner: null,
+    cuisine: "Latin American",
+    tags: "arepas",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [12, 20]
+  },
+  {
+    name: "Singleton Whisky Bar",
+    owner: null,
+    cuisine: "alcohol",
+    tags: "whisky",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [18, 23]
+  },
+  {
+    name: "PIC NIC 34",
+    owner: null,
+    cuisine: "Italian",
+    tags: "pizza",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [15, 22]
   }
-}
+];
+
+
+// add seeds to database
+
+Truck.create(truckSeeds);
