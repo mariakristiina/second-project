@@ -10,7 +10,9 @@ const User = require("../models/User");
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/project2', {useNewUrlParser: true})
+  .connect('mongodb://localhost/project2', {
+    useNewUrlParser: true
+  })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -18,8 +20,7 @@ mongoose
     console.error('Error connecting to mongo', err)
   });
 
-let users = [
-  {
+let users = [{
     username: "alice",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
   },
@@ -30,18 +31,62 @@ let users = [
 ]
 
 User.deleteMany()
-.then(() => {
-  return User.create(users)
-})
-.then(usersCreated => {
-  console.log(`${usersCreated.length} users created with the following id:`);
-  console.log(usersCreated.map(u => u._id));
-})
-.then(() => {
-  // Close properly the connection to Mongoose
-  mongoose.disconnect()
-})
-.catch(err => {
-  mongoose.disconnect()
-  throw err
-})
+  .then(() => {
+    return User.create(users)
+  })
+  .then(usersCreated => {
+    console.log(`${usersCreated.length} users created with the following id:`);
+    console.log(usersCreated.map(u => u._id));
+  })
+  .then(() => {
+    // Close properly the connection to Mongoose
+    mongoose.disconnect()
+  })
+  .catch(err => {
+    mongoose.disconnect()
+    throw err
+  })
+
+// seeds for food trucks
+const truckSeeds = {
+  {
+    name: "Zwei Dicke Bärren",
+    owner: null,
+    cuisine: null,
+    tags: "dessert",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [12, 19]
+  },
+  {
+    name: "Big Stuff Smoked BBQ",
+    owner: null,
+    cuisine: "American",
+    tags: "barbeque",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [12, 22]
+  },
+  {
+    name: "Humble Pie",
+    owner: null,
+    cuisine: "British",
+    tags: "dessert",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [12, 22]
+  },
+  {
+    name: "Bunsmobile",
+    owner: null,
+    cuisine: "American",
+    tags: "burger",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [18, 22]
+  }
+}
