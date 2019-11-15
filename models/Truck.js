@@ -11,11 +11,18 @@ const truckSchema = new Schema({
     type: String,
     enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "alcohol"],
     required: true
-  }
+  },
   tags: {
     type: String,
     enum: ["vegetarian", "vegan", "barbeque", "burger", "asian", "dumplings", "pizza", "dessert"],
-  }
+  },
+  locations: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Location'
+  },
+  rating: Number,
+  menu: [String],
+  hours: [Number]
 });
 const Truck = mongoose.model("Truck", truckSchema);
 module.exports = Truck;
