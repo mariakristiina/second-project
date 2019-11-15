@@ -48,77 +48,108 @@ User.deleteMany()
   })
 
 // seeds for food trucks
+
 const truckSeeds = [{
-    name: "Zwei Dicke Bärren",
-    owner: null,
-    cuisine: null,
-    tags: "dessert",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [12, 19]
-  },
-  {
-    name: "Big Stuff Smoked BBQ",
-    owner: null,
-    cuisine: "American",
-    tags: "barbeque",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [12, 22]
-  },
-  {
-    name: "Humble Pie",
-    owner: null,
-    cuisine: "British",
-    tags: "dessert",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [12, 22]
-  },
-  {
-    name: "Bunsmobile",
-    owner: null,
-    cuisine: "American",
-    tags: "burger",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [18, 22]
-  },
-  {
-    name: "Maria Maria Arepas",
-    owner: null,
-    cuisine: "Latin American",
-    tags: "arepas",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [12, 20]
-  },
-  {
-    name: "Singleton Whisky Bar",
-    owner: null,
-    cuisine: "alcohol",
-    tags: "whisky",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [18, 23]
-  },
-  {
-    name: "PIC NIC 34",
-    owner: null,
-    cuisine: "Italian",
-    tags: "pizza",
-    locations: null,
-    rating: 8,
-    menu: null,
-    hours: [15, 22]
-  }
-];
+
+  name: "Zwei Dicke Bärren",
+  owner: null,
+  cuisine: null,
+  tags: "dessert",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [12, 19]
+}, {
+  name: "Big Stuff Smoked BBQ",
+  owner: null,
+  cuisine: "American",
+  tags: "barbeque",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [12, 22]
+}, {
+  name: "Humble Pie",
+  owner: null,
+  cuisine: "British",
+  tags: "dessert",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [12, 22]
+}, {
+  name: "Bunsmobile",
+  owner: null,
+  cuisine: "American",
+  tags: "burger",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+}, {
+  name: "Maria Maria Arepas",
+  owner: null,
+  cuisine: "Latin American",
+  tags: "arepas",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [12, 20]
+}, {
+  name: "Singleton Whisky Bar",
+  owner: null,
+  cuisine: "alcohol",
+  tags: "whisky",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 23]
+}, {
+  name: "PIC NIC 34",
+  owner: null,
+  cuisine: "Italian",
+  tags: "pizza",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [15, 22]
+}, {
+  name: "Laksa Berlin",
+  owner: null,
+  cuisine: "Asian",
+  tags: "asian",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+}, {
+  name: "Mamas Banh",
+  owner: null,
+  cuisine: "Vietnamese",
+  tags: ["asian", "vegetarian"],
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+}, {
+  name: "Tausendsuend Cakes",
+  owner: null,
+  cuisine: "Vietnamese",
+  tags: ["dessert"],
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+}, {
+  name: "Sun Day Burgers",
+  owner: null,
+  cuisine: "American",
+  tags: "burger",
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+}];
 
 
 // add seeds to database
