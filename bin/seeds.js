@@ -48,8 +48,8 @@ User.deleteMany()
   })
 
 // seeds for food trucks
-const truckSeeds = {
-  {
+const truckSeeds = 
+{
     name: "Zwei Dicke Bärren",
     owner: null,
     cuisine: null,
@@ -89,4 +89,44 @@ const truckSeeds = {
     menu: null,
     hours: [18, 22]
   }
+  {
+    name: "Laksa Berlin",
+    owner: null,
+    cuisine: "Asian",
+    tags: "asian",
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [18, 22]
+  },
+  {
+    name: "Mamas Banh",
+    owner: null,
+    cuisine: "Vietnamese",
+    tags: ["asian", "vegetarian"],
+    locations: null,
+    rating: 8,
+    menu: null,
+    hours: [18, 22]
+  },
+  {
+  name: "Tausendsuend Cakes",
+  owner: null,
+  cuisine: "Vietnamese",
+  tags: ["dessert"],
+  locations: null,
+  rating: 8,
+  menu: null,
+  hours: [18, 22]
+},
+{
+name: "Sun Day Burgers",
+owner: null,
+cuisine: "American",
+tags: "burger",
+locations: null,
+rating: 8,
+menu: null,
+hours: [18, 22]
+},
 }
