@@ -16,7 +16,7 @@ router.get("/login", (req, res, next) => {
 });
 
 router.get("/userprofile/id", (req, res) => {
-  
+
   res.render("auth/userprofile/id");
 });
 
@@ -66,23 +66,32 @@ router.post("/signup", (req, res, next) => {
       password: hashPass,
       truck
 
-    });
+    })
 
     newUser.save()
       .then(() => {
-        if (req.body.truck === "YES") {
-          res.redirect("/auth/add-a-truck");
-        } else {
-          res.redirect("/auth/userprofile");
-        }
-      })
-      .catch(err => {
-        res.render("auth/signup", {
-          message: "Something went wrong"
-        });
+        console.log(newUser);
+        req.session.user = newUser;
+        .then(() => {
+            if (req.body.truck === "YES") {
+              res.redirect("/auth/add-a-truck");
+            } else {
+              res.redirect("/auth/userprofile");
+            }
+          })
+          .catch(err => {
+            res.render("auth/signup", {
+              message: "Something went wrong"
+            })
+          })
       })
   });
-});
+
+
+
+
+
+
 
 
 
@@ -93,18 +102,20 @@ router.get("/logout", (req, res) => {
 
 
 const loginCheck = () => {
+
   return (req, res, next) => {
     console.log(req);
     if (req.session.user) {
       next();
     } else {
+      console.log(req.session);
       res.redirect("/auth/login");
     }
   }
 }
 
 router.get('/add-a-truck', loginCheck(), (req, res, next) => {
-  res.render('../views/auth/add-a-truck.hbs');
+  res.render("../views/auth/add-a-truck");
 
 });
 
