@@ -26,8 +26,12 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+  if (!username) {
+    res.render("auth/signup", {message: "Please insert a username"} );
+    return;
+  } 
+  if(password < 8) {
+    res.render("auth/signup", { message: "Password is too short" });
     return;
   }
 

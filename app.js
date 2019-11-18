@@ -9,6 +9,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
@@ -66,14 +67,49 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: 'irongenerator',
+  secret: process.env.SESSION_SECRET,
+  cookie: {maxAge: 24 * 60 * 60},
   resave: true,
   saveUninitialized: true,
   store: new MongoStore( { mongooseConnection: mongoose.connection })
 }))
 app.use(flash());
 require('./passport')(app);
-    
+
+// passport.deserializeUser((id, done) => {
+//   User.findById(id)
+//   .then(user => {
+//     done(null, user);
+//   })
+//   .catch(err => {
+//     done(err);
+//   });
+// });
+
+// passport.use(
+//   new LocalStrategy((username, password, done) => {
+//     User.findOne({username: username})
+//     .then(user => {
+//       if(!user){
+//         done(null, false, {message: "Invalid credentials"});
+//         return;
+//       }
+//       return bcrypt.compare(password, user.password).then(bool => {
+//         if(bool === false) {
+//           done(null, false, {message: "Invalid credentials"});
+//         } else {
+//           done(null, user);
+//         }
+//       });
+//     })
+//     .catch(err => {
+//       done(err);
+//     });
+//   })
+// );
+
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 const index = require('./routes/index');
 app.use('/', index);

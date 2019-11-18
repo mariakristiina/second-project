@@ -6,7 +6,7 @@ const truckSchema = new Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
   cuisine: {
     type: String,
     enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "alcohol", "Asian", "Dessert"],

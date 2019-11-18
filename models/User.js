@@ -3,7 +3,11 @@ const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  truck: {
+    type: String,
+    enum: ["YES", "NO"],
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',
