@@ -2,15 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
-  locations: {
-    enum: [],
-    default: [locations.enum[0]],
-    required: true
-  },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
+  latitude: Number,
+  longitude: Number
+  // {
+  //   // enum: []
+  //   // default: [locations[0]],
+  //   // required: true
+  // },
+  // owner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User"
+  // }
 })
 
 const Location = mongoose.model("Location", locationSchema);
