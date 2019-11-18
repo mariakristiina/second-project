@@ -15,9 +15,9 @@ router.get("/login", (req, res, next) => {
   });
 });
 
-router.get("/userprofile/id", (req, res) => {
-  
-  res.render("auth/userprofile/id");
+router.get("/userprofile", (req, res) => {
+
+  res.render("auth/userprofile");
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -70,6 +70,7 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
       .then(() => {
+        req.session.user = newUser;
         if (req.body.truck === "YES") {
           res.redirect("/auth/add-a-truck");
         } else {
