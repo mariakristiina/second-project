@@ -9,17 +9,17 @@ const truckSchema = new Schema({
   },
   cuisine: {
     type: String,
-    enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "alcohol", "Asian", "Dessert"],
+    enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "alcohol", "Asian", "Dessert", 'British'],
     required: true
   },
   tags: {
     type: String,
     enum: ["vegetarian", "vegan", "barbeque", "burger", "asian", "dumplings", "pizza", "dessert"],
   },
-  locations: {
+  locations: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Location'
-  },
+    ref: "Location"
+  }],
   rating: Number,
   menu: [String],
   hours: [Number]
