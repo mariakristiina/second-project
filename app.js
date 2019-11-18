@@ -76,40 +76,6 @@ app.use(session({
 app.use(flash());
 require('./passport')(app);
 
-// passport.deserializeUser((id, done) => {
-//   User.findById(id)
-//   .then(user => {
-//     done(null, user);
-//   })
-//   .catch(err => {
-//     done(err);
-//   });
-// });
-
-// passport.use(
-//   new LocalStrategy((username, password, done) => {
-//     User.findOne({username: username})
-//     .then(user => {
-//       if(!user){
-//         done(null, false, {message: "Invalid credentials"});
-//         return;
-//       }
-//       return bcrypt.compare(password, user.password).then(bool => {
-//         if(bool === false) {
-//           done(null, false, {message: "Invalid credentials"});
-//         } else {
-//           done(null, user);
-//         }
-//       });
-//     })
-//     .catch(err => {
-//       done(err);
-//     });
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 const index = require('./routes/index');
 app.use('/', index);
