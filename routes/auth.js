@@ -15,9 +15,15 @@ router.get("/login", (req, res, next) => {
   });
 });
 
+<<<<<<< HEAD
 router.get("/userprofile/id", (req, res) => {
 
   res.render("auth/userprofile/id");
+=======
+router.get("/userprofile", (req, res) => {
+
+  res.render("auth/userprofile");
+>>>>>>> 504aac0727452458438c388e49d9bdb21fdb0ce3
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -70,20 +76,17 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
       .then(() => {
-        console.log(newUser);
         req.session.user = newUser;
-        .then(() => {
-            if (req.body.truck === "YES") {
-              res.redirect("/auth/add-a-truck");
-            } else {
-              res.redirect("/auth/userprofile");
-            }
-          })
-          .catch(err => {
-            res.render("auth/signup", {
-              message: "Something went wrong"
-            })
-          })
+        if (req.body.truck === "YES") {
+          res.redirect("/auth/add-a-truck");
+        } else {
+          res.redirect("/auth/userprofile");
+        }
+      })
+      .catch(err => {
+        res.render("auth/signup", {
+          message: "Something went wrong"
+        });
       })
   });
 
