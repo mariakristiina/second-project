@@ -29,11 +29,15 @@ router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   if (!username) {
-    res.render("auth/signup", {message: "Please insert a username"} );
+    res.render("auth/signup", {
+      message: "Please insert a username"
+    });
     return;
-  } 
-  if(password < 8) {
-    res.render("auth/signup", { message: "Password is too short" });
+  }
+  if (password < 8) {
+    res.render("auth/signup", {
+      message: "Password is too short"
+    });
     return;
   }
 
@@ -71,5 +75,25 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+
+const loginCheck = () => {
+  return (req, res, next) => {
+    console.log(req);
+    if (req.session.user) {
+      next();
+    } else {
+      res.redirect("/auth/login");
+    }
+  }
+}
+
+router.get('/add-a-truck', loginCheck(), (req, res, next) => {
+  res.render('../views/auth/add-a-truck.hbs');
+
+});
+
+
+
 
 module.exports = router;

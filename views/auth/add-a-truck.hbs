@@ -1,0 +1,52 @@
+<div class="add-truck">
+  <form action="POST">
+
+    <label for="name" id="name">Name your food truck:</label>
+    <input type="text" name="name" id="name" value="write something catchy">
+    <br>
+    <label for="description" id="description">Add a description:</label>
+    <input type="textarea" name="description" id="description">
+
+    <br>
+    <label for="cuisine">Select a cuisine</label>
+    <select name="cuisine" id="cuisine">
+      <option value="Please select a cuisine"></option>
+      <option value="American">American</option>
+      <option value="Latin American">Latin American</option>
+      <option value="Italian">Italian</option>
+      <option value="German">German</option>
+      <option value="Mediterranean">Mediterranean</option>
+      <option value="Vietnamese">Vietnamese</option>
+      <option value="Chinese">Chinese</option>
+      <option value="British">British</option>
+      <option value="Asian Fusion">Asian Fusion</option>
+      <option value="Dessert">Dessert</option>
+      <option value="Cocktails/Drinks">Cocktails or drinks</option>
+    </select>
+
+    <br>
+    <div class="tags">
+      <p>Add relevant tags:</p>
+      <label for="vegetarian">vegetarian:</label>
+      <input type="checkbox" name="vegetarian" value="vegetarian" id="tags">
+      <label for="vegan">vegan:</label>
+      <input type="checkbox" name="vegan" value="vegan" id="tags">
+      <label for="barbeque">barbeque:</label>
+      <input type="checkbox" name="barbeque" value="barbeque" id="tags">
+      <label for="burger">burger:</label>
+      <input type="checkbox" name="burger" value="burger" id="tags">
+      <label for="asian">asian:</label>
+      <input type="checkbox" name="asian" value="asian" id="tags">
+      <label for="dumplings">dumplings:</label>
+      <input type="checkbox" name="dumplings" value="dumplings" id="tags">
+      <label for="pizza">pizza:</label>
+      <input type="checkbox" name="pizza" value="pizza" id="tags">
+      <label for="dessert">dessert:</label>
+      <input type="checkbox" name="dessert" value="dessert" id="tags">
+
+<br>
+      <button id="btn-add-truck" type="submit">Add Truck</button>
+    </div>
+
+  </form>
+</div>
