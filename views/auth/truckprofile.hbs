@@ -1,6 +1,12 @@
 <h1>Welcome truck by {{user.username}}</h1>
 
 <a href="">Edit your location</a>
-<a href="">Edit your truck information</a>
+<a href="/auth/edit-truck">Edit your truck information</a>
 
 <button>Delete Your Profile</button>
+
+<h2>Your trucks</h2>
+{{#each trucks}}
+<a href="/truck-profile/{{_id}}">{{name}}</a>
+
+{{/each}}

@@ -25,13 +25,18 @@ router.get("/login", (req, res, next) => {
 });
 
 
-router.get("/userprofile", loginCheck(), (req, res, next) => {
-  if(req.user.truck === "YES") {
-  res.render("auth/truckprofile", {user: req.user}); }
-  else { res.render("auth/userprofile", {user: req.user}); }
+router.get("/userprofile", (req, res, next) => {
+  if (req.user.truck === "YES") {
+    res.render("auth/truckprofile", {
+      user: req.user
+    });
+  } else {
+    res.render("auth/userprofile", {
+      user: req.user,
+      truck: req.truck
+    });
+  }
 });
-
-
 
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/auth/userprofile",
@@ -105,9 +110,15 @@ router.get('/add-a-truck', loginCheck(), (req, res, next) => {
 
 });
 
+router.get("/edit-truck", loginCheck(), (req, res) => {
+  res.render("auth/edit-truck", {
+    user: req.user
+  });
+})
+
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/", {truck: req.truck});
 });
 
 module.exports = router;
