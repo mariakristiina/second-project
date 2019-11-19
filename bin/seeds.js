@@ -12,7 +12,7 @@ const Truck = require('../models/Truck');
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/second-project', {
+  .connect(process.env.MONGODB_URI ||'mongodb://localhost/second-project', {
     useNewUrlParser: true
   })
   .then(x => {
