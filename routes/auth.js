@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const Truck = require("../models/Truck")
 
 
 // Bcrypt to encrypt passwords
@@ -12,7 +13,7 @@ const loginCheck = () => {
 
   return (req, res, next) => {
 
-    if (req.user) {
+    if (req.session) {
       next();
       console.log("successful login check")
     } else {
@@ -24,7 +25,8 @@ const loginCheck = () => {
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", {
-    "message": req.flash("error")
+    user: req.user,
+    message: req.flash("error")
   });
 });
 
@@ -32,12 +34,12 @@ router.get("/login", (req, res, next) => {
 router.get("/userprofile", (req, res, next) => {
   if (req.user.truck === "YES") {
     res.render("auth/truckprofile", {
-      user: req.user
-    });
-  } else {
-    res.render("auth/userprofile", {
       user: req.user,
       truck: req.truck
+    });
+  } else if (req.user.truck === "NO") {
+    res.render("auth/userprofile", {
+      user: req.user
     });
   }
 });
@@ -91,15 +93,21 @@ router.post("/signup", (req, res, next) => {
     })
 
     newUser.save()
-      .then(() => {
-        req.session.user = newUser;
+      .then(newUser => {
+
+        req.login(newUser,err=>{
+          if(err)next(err);
+        else {
         console.log(req.session);
-        if (req.body.truck === "YES") {
+        console.log("--------------", req.body.truck)
+        if (req.user.truck === "YES") {
           res.redirect("/auth/add-a-truck");
         } else {
           res.redirect("/auth/userprofile");
         }
+      }
       })
+    })
       .catch(err => {
         res.render("auth/signup", {
           message: "Something went wrong"
@@ -108,15 +116,9 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
 
-
-router.get("/add-a-truck", (req, res, next) => {
+router.get("/add-a-truck", loginCheck(), (req, res, next) => {
   res.render("../views/auth/add-a-truck");
-
 });
 
 router.post("/add-a-truck", (req, res, next) => {
@@ -156,15 +158,52 @@ router.get("/truckProfile", (req, res, next) => {
   })
 });
 
+router.get("/truck", (req, res) => {
+  res.render("auth/truck", {
+    truck: req.truck
+  });
+})
+
+router.post("/truck/id/delete", (req, res) => {
+  const query = {
+    _id: req.params.id
+  };
+  Truck.deleteOne(query)
+    .then(() => {
+      res.redirect("/auth/truckprofile", {
+        message: "Your truck was removed"
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+});
+
 router.get("/edit-truck", loginCheck(), (req, res) => {
   res.render("auth/edit-truck", {
     user: req.user
   });
 })
 
+router.get("/userprofile/:id/delete", (req, res) => {
+
+  const query = req.params.id
+  console.log(req.params.id);
+  User.findByIdAndDelete(query)
+    .then(deletedUser => {
+
+      res.redirect("/auth/login", {
+      
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+});
+
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/", {truck: req.truck});
+  res.redirect("/");
 });
 
 module.exports = router;
