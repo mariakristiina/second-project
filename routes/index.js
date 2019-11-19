@@ -13,8 +13,8 @@ router.get("/api/findtrucks", (req, res, next) => {
     .then(response => {
       // res.json(response.request.response)
       res.json(response);
-      console.log('passed to hbs ',
-        response.request.response);
+      // console.log('passed to hbs ',
+      //   response.request.response);
     })
     .catch(err => {
       next(err);

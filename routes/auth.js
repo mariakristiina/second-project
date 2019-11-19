@@ -127,6 +127,7 @@ router.post("/signup", (req, res, next) => {
         });
       })
   });
+})
 });
 
 
@@ -182,7 +183,7 @@ router.get("/:id/truck", (req, res) => {
     loggedIn: req.user
   })
   });
-})
+});
 
 router.get("/:id/truck/delete", (req, res) => {
   const query = req.params.id
@@ -228,7 +229,7 @@ router.post("/:id/truck/edit", (req, res) => {
   .catch(err => {
     console.log(err);
   })
-})
+});
 
 router.get("/logout", (req, res) => {
   req.logout();
