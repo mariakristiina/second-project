@@ -12,6 +12,7 @@ var map = new mapboxgl.Map({
 
 let marker = new mapboxgl.Marker({
   draggable: true,
+  color: "red",
 
 }).setLngLat([13.3890, 52.5169]).addTo(map);
 

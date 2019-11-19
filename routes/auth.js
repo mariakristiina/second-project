@@ -6,6 +6,7 @@ const Truck = require("../models/Truck");
 const Location = require("../models/Location");
 
 
+
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -96,19 +97,19 @@ router.post("/signup", (req, res, next) => {
     newUser.save()
       .then(newUser => {
 
-        req.login(newUser,err=>{
-          if(err)next(err);
-        else {
-        console.log(req.session);
-        console.log("--------------", req.body.truck)
-        if (req.user.truck === "YES") {
-          res.redirect("/auth/add-a-truck");
-        } else {
-          res.redirect("/auth/userprofile");
-        }
-      }
+        req.login(newUser, err => {
+          if (err) next(err);
+          else {
+            console.log(req.session);
+            console.log("--------------", req.body.truck)
+            if (req.user.truck === "YES") {
+              res.redirect("/auth/add-a-truck");
+            } else {
+              res.redirect("/auth/userprofile");
+            }
+          }
+        })
       })
-    })
       .catch(err => {
         res.render("auth/signup", {
           message: "Something went wrong"
@@ -116,6 +117,10 @@ router.post("/signup", (req, res, next) => {
       })
   });
 });
+
+
+
+
 
 
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
@@ -130,8 +135,7 @@ router.get("/truckProfile", (req, res, next) => {
 });
 
 
-
-router.post("/add-a-truck", (req, res, next) => {
+router.post("/add-a-truck", loginCheck(), (req, res, next) => {
   console.log(req.body);
   const {
     name,
@@ -141,19 +145,22 @@ router.post("/add-a-truck", (req, res, next) => {
     menu,
     hours
   } = req.body;
-  const location = [req.body.lng, req.body.lat];
+
+  const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+  console.log(location);
+
   console.log(req.user)
   const owner = req.user._id;
 
   Truck.create({
-      name,
-      description,
-      cuisine,
-      tags,
-      owner,
-      location,
-      menu,
-      hours
+      name: name,
+      description: description,
+      cuisine: cuisine,
+      tags: tags,
+      owner: owner,
+      locations: location,
+      menu: menu,
+      hours: hours,
     })
     .then(() => {
       res.redirect("/auth/truckProfile");
@@ -202,7 +209,7 @@ router.get("/userprofile/:id/delete", (req, res) => {
     .then(deletedUser => {
 
       res.redirect("/auth/login", {
-      
+
       });
     })
     .catch(err => {

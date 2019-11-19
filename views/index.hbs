@@ -3,7 +3,9 @@
 
 
 
+
 <div id='map' style='width: 800px; height: 600px;'></div>
+
 <script>
   mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
   var map = new mapboxgl.Map({
@@ -23,12 +25,31 @@
 
 
 
+  const getMarkers = () => {
+
+    axios.get('/api/findtrucks').then(response => {
+
+      const coordinates = response.data.map(x => {
+        return x.locations;
+      })
+
+      console.log(coordinates)
+
+      coordinates.forEach(x => {
+        return new mapboxgl.Marker().setLngLat(x).addTo(map)
+      })
+
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  getMarkers();
+
+
+
 </script>
 
-{{!-- let foodTrucks = new mapboxgl.Marker()
-    .setLngLat(
-      Truck.find().map(truck => {
-        return truck.location;
-      });
-    )
-  .addTo(map); --}}
+{{!-- response.forEach(truck => {
+        const coordinates = truck.locations;
+        new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+      }) --}}

@@ -18,11 +18,11 @@ const truckSchema = new Schema({
   //   enum: ["vegetarian", "vegan", "barbeque", "burger", "asian", "dumplings", "pizza", "dessert"],
   // },
   tags: Array,
-
-  locations: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Location"
-  }],
+  locations: Array,
+  // locations: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Location"
+  // }],
   rating: Number,
   menu: String,
   hours: String
