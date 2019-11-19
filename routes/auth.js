@@ -9,10 +9,14 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 const loginCheck = () => {
+
   return (req, res, next) => {
+
     if (req.user) {
       next();
+      console.log("successful login check")
     } else {
+      console.log(req.body)
       res.redirect("/auth/login");
     }
   }
@@ -104,32 +108,11 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
-
-
-
-
-
-
-
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
 
-
-const loginCheck = () => {
-
-  return (req, res, next) => {
-
-    if (req.user) {
-      next();
-      console.log("successful login check")
-    } else {
-      console.log(req.body)
-      res.redirect("/auth/login");
-    }
-  }
-}
 
 router.get("/add-a-truck", (req, res, next) => {
   res.render("../views/auth/add-a-truck");
