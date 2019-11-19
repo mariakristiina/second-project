@@ -1,5 +1,5 @@
 <div class="add-truck">
-  <form action="POST">
+  <form action="/auth/add-a-truck" method='post'>
 
     <label for="name" id="name">Name your food truck:</label>
     <input type="text" name="name" id="name" value="write something catchy">
@@ -44,9 +44,59 @@
       <label for="dessert">dessert:</label>
       <input type="checkbox" name="dessert" value="dessert" id="tags">
 
-<br>
-      <button id="btn-add-truck" type="submit">Add Truck</button>
+      <br>
+      <label for="location">Location:</label>
+      <input type="text" name="location" id="location">
+
+      <div id='map' style='width: 600px; height: 300px;'></div>
+      <script>
+
+        mapboxgl.accessToken =
+          'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v9',
+          center: [13.40, 52.52],
+          zoom: 12
+
+        });
+
+        let marker = new mapboxgl.Marker({
+          draggable: true,
+
+        }).setLngLat([13.3890, 52.5169]).addTo(map);
+
+        axios.interceptors.request.use(config => {
+          // perform a task before the request is sent
+          console.log('Request was sent');
+
+          return config;
+        }, error => {
+          // handle the error
+          return Promise.reject(error);
+        });
+
+        // sent a GET request
+        axios.get('https://api.github.com/users/mapbox')
+          .then(response => {
+            console.log(response.data.created_at);
+          });
+
+
+      </script>
     </div>
+
+    <br>
+    <label for="menu">Menu items:</label>
+    <input type="text" name="menu" id="menu">
+    <br>
+
+    <label for="hours">Opening hours:</label>
+    <input type="text" name="hours" id="hours">
+    <br>
+
+    <button id="btn-add-truck" type="submit">Add Truck</button>
+
 
   </form>
 </div>

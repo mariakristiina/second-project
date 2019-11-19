@@ -15,15 +15,9 @@ router.get("/login", (req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
-router.get("/userprofile/id", (req, res) => {
-
-  res.render("auth/userprofile/id");
-=======
 router.get("/userprofile", (req, res) => {
 
   res.render("auth/userprofile");
->>>>>>> 504aac0727452458438c388e49d9bdb21fdb0ce3
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -77,6 +71,7 @@ router.post("/signup", (req, res, next) => {
     newUser.save()
       .then(() => {
         req.session.user = newUser;
+        console.log(req.session);
         if (req.body.truck === "YES") {
           res.redirect("/auth/add-a-truck");
         } else {
@@ -89,7 +84,7 @@ router.post("/signup", (req, res, next) => {
         });
       })
   });
-
+});
 
 
 
@@ -107,19 +102,57 @@ router.get("/logout", (req, res) => {
 const loginCheck = () => {
 
   return (req, res, next) => {
-    console.log(req);
-    if (req.session.user) {
+
+    if (req.user) {
       next();
+      console.log("successful login check")
     } else {
-      console.log(req.session);
+      console.log(req.body)
       res.redirect("/auth/login");
     }
   }
 }
 
-router.get('/add-a-truck', loginCheck(), (req, res, next) => {
+router.get("/add-a-truck", (req, res, next) => {
   res.render("../views/auth/add-a-truck");
 
+});
+
+router.post("/add-a-truck", (req, res, next) => {
+  console.log(req.body);
+  const {
+    name,
+    description,
+    cuisine,
+    tags,
+    menu,
+    hours
+  } = req.body;
+  console.log(req.user)
+  const owner = req.user._id;
+  // const location = marker.getLngLat();
+  Truck.create({
+      name,
+      description,
+      cuisine,
+      tags,
+      location,
+      owner,
+      menu,
+      hours
+    })
+    .then(() => {
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err);
+    })
+});
+
+router.get("/truckProfile", (req, res, next) => {
+  res.render("/auth/truckProfile", {
+    message: "your truck has been added!"
+  })
 });
 
 
