@@ -1,72 +1,70 @@
-<div class="add-truck">
-  <form action="/auth/add-a-truck" method='post'>
+<form action="/auth/add-a-truck" method='post'>
+  <div class="add-truck"></div>
+  <label for="name" id="name">Name your food truck:</label>
+  <input type="text" name="name" id="name">
+  <br>
+  <label for="description" id="description">Add a description:</label>
+  <input type="textarea" name="description" id="description">
 
-    <label for="name" id="name">Name your food truck:</label>
-    <input type="text" name="name" id="name" value="write something catchy">
-    <br>
-    <label for="description" id="description">Add a description:</label>
-    <input type="textarea" name="description" id="description">
+  <br>
+  <label for="cuisine">Select a cuisine</label>
+  <select name="cuisine" id="cuisine">
+    <option value="Please select a cuisine"></option>
+    <option value="American">American</option>
+    <option value="Latin American">Latin American</option>
+    <option value="Italian">Italian</option>
+    <option value="German">German</option>
+    <option value="Mediterranean">Mediterranean</option>
+    <option value="Vietnamese">Vietnamese</option>
+    <option value="Chinese">Chinese</option>
+    <option value="British">British</option>
+    <option value="Asian Fusion">Asian Fusion</option>
+    <option value="Dessert">Dessert</option>
+    <option value="Cocktails/Drinks">Cocktails or drinks</option>
+  </select>
 
-    <br>
-    <label for="cuisine">Select a cuisine</label>
-    <select name="cuisine" id="cuisine">
-      <option value="Please select a cuisine"></option>
-      <option value="American">American</option>
-      <option value="Latin American">Latin American</option>
-      <option value="Italian">Italian</option>
-      <option value="German">German</option>
-      <option value="Mediterranean">Mediterranean</option>
-      <option value="Vietnamese">Vietnamese</option>
-      <option value="Chinese">Chinese</option>
-      <option value="British">British</option>
-      <option value="Asian Fusion">Asian Fusion</option>
-      <option value="Dessert">Dessert</option>
-      <option value="Cocktails/Drinks">Cocktails or drinks</option>
-    </select>
-
-    <br>
-    <div class="tags">
-      <p>Add relevant tags:</p>
-      <label for="vegetarian">vegetarian:</label>
-      <input type="checkbox" name="tags" value="vegetarian" id="tags">
-      <label for="vegan">vegan:</label>
-      <input type="checkbox" name="tags" value="vegan" id="tags">
-      <label for="barbeque">barbeque:</label>
-      <input type="checkbox" name="tags" value="barbeque" id="tags">
-      <label for="burger">burger:</label>
-      <input type="checkbox" name="tags" value="burger" id="tags">
-      <label for="asian">asian:</label>
-      <input type="checkbox" name="tags" value="asian" id="tags">
-      <label for="dumplings">dumplings:</label>
-      <input type="checkbox" name="tags" value="dumplings" id="tags">
-      <label for="pizza">pizza:</label>
-      <input type="checkbox" name="tags" value="pizza" id="tags">
-      <label for="dessert">dessert:</label>
-      <input type="checkbox" name="tags" value="dessert" id="tags">
-
-      <br>
-      <p>Location:</p>
-
-      <div id='map' style='width: 600px; height: 300px;'></div>
-      <script src="/javascripts/add-truck.js"></script>
-
-      <input type="text" name="lng" id="lng">
-      <input type="text" name="lat" id="lat">
-
-
-    </div>
+  <br>
+  <div class="tags">
+    <p>Add relevant tags:</p>
+    <label for="vegetarian">vegetarian:</label>
+    <input type="checkbox" name="tags" value="vegetarian" id="tags">
+    <label for="vegan">vegan:</label>
+    <input type="checkbox" name="tags" value="vegan" id="tags">
+    <label for="barbeque">barbeque:</label>
+    <input type="checkbox" name="tags" value="barbeque" id="tags">
+    <label for="burger">burger:</label>
+    <input type="checkbox" name="tags" value="burger" id="tags">
+    <label for="asian">asian:</label>
+    <input type="checkbox" name="tags" value="asian" id="tags">
+    <label for="dumplings">dumplings:</label>
+    <input type="checkbox" name="tags" value="dumplings" id="tags">
+    <label for="pizza">pizza:</label>
+    <input type="checkbox" name="tags" value="pizza" id="tags">
+    <label for="dessert">dessert:</label>
+    <input type="checkbox" name="tags" value="dessert" id="tags">
 
     <br>
-    <label for="menu">Menu items:</label>
-    <input type="text" name="menu" id="menu">
-    <br>
+    <p>Location:</p>
 
-    <label for="hours">Opening hours:</label>
-    <input type="text" name="hours" id="hours">
-    <br>
+    <div id='map' style='width: 600px; height: 300px;'></div>
+    <script src="/javascripts/add-truck.js"></script>
 
-    <button id="btn-add-truck" type="submit">Add Truck</button>
+    <input type="text" name="lng" id="lng">
+    <input type="text" name="lat" id="lat">
 
 
-  </form>
-</div>
+  </div>
+
+  <br>
+  <label for="menu">Menu items:</label>
+  <input type="text" name="menu" id="menu">
+  <br>
+
+  <label for="hours">Opening hours:</label>
+  <input type="text" name="hours" id="hours">
+  <br>
+
+  <button id="btn-add-truck" type="submit">Add Truck</button>
+
+  </div>
+</form>

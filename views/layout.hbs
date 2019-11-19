@@ -27,10 +27,11 @@
        {{#if loggedIn}}
       <a href="/auth/userprofile">Profile</a>
       <a href="/auth/logout">Logout</a>
-       {{/if}}
+      {{/if}}
+      {{#if loggedOut}}
       <a href="/auth/login">Login</a>
       <a href="/auth/signup">Sign Up</a>
-
+      {{/if}}
 
 
     </div>
