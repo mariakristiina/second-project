@@ -25,7 +25,8 @@ const truckSchema = new Schema({
   // }],
   rating: Number,
   menu: String,
-  hours: String
+  hours: String,
+  image: String
 });
 
 

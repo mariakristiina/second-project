@@ -20,10 +20,15 @@ nav {
   padding-right: 2vw;
 }
 
+.mapboxgl-popup {
+  text-align: center;
+  color: rgb(230, 101, 88);
+
+}
 
 // from mapbox to style markers:
 // .marker {
-//   background-image: url('mapbox-icon.png');
+//   background-image: url('https://banner2.cleanpng.com/20180516/pqw/kisspng-food-truck-logo-5afbc2cee449b7.7775427115264488469351.jpg');
 //   background-size: cover;
 //   width: 50px;
 //   height: 50px;

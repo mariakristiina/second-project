@@ -4,5 +4,8 @@
 <h2>Menu: {{truck.menu}}</h2>
 <h3>Opening Hours: {{truck.hours}}</h3>
 
+{{#if userIsOwner}}
 <a href="/auth/{{truck._id}}/truck/edit"><button>Edit this Truck</button></a>
 <a href="/auth/{{truck._id}}/truck/delete"><button>Delete this Truck</button></a>
+
+{{/if}}

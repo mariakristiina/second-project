@@ -15,4 +15,8 @@ nav {
 .left a {
   padding-right: 2vw; }
 
+.mapboxgl-popup {
+  text-align: center;
+  color: #e66558; }
+
 /*# sourceMappingURL=style.css.map */

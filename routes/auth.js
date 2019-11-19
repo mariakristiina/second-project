@@ -35,14 +35,16 @@ router.get("/login", (req, res, next) => {
 
 router.get("/userprofile", loginCheck(), (req, res, next) => {
   if (req.user.truck === "YES") {
-    Truck.find( {owner: req.user._id} )
-  .then(trucks => {
-    res.render("auth/truckprofile", {
-      user: req.user,
-      trucks: trucks,
-      loggedIn: req.user
-    })
-    });
+    Truck.find({
+        owner: req.user._id
+      })
+      .then(trucks => {
+        res.render("auth/truckprofile", {
+          user: req.user,
+          trucks: trucks,
+          loggedIn: req.user
+        })
+      });
   } else if (req.user.truck === "NO") {
     res.render("auth/userprofile", {
       user: req.user,
@@ -52,11 +54,16 @@ router.get("/userprofile", loginCheck(), (req, res, next) => {
 });
 
 router.get("/truckProfile", (req, res, next) => {
-  Truck.find( {owner: req.user._id} )
-  .then(trucks => {
-    res.render("auth/truckProfile", {trucks: trucks, user: req.user})
-  })
-  });
+  Truck.find({
+      owner: req.user._id
+    })
+    .then(trucks => {
+      res.render("auth/truckProfile", {
+        trucks: trucks,
+        user: req.user
+      })
+    })
+});
 
 
 
@@ -111,23 +118,23 @@ router.post("/signup", (req, res, next) => {
     newUser.save()
       .then(newUser => {
 
-        req.login(newUser,err=>{
-          if(err)next(err);
-        else {
-        if (req.user.truck === "YES") {
-          res.redirect("/auth/add-a-truck");
-        } else {
-          res.redirect("/auth/userprofile");
-        }
-      }
-      })
-      .catch(err => {
-        res.render("auth/signup", {
-          message: "Something went wrong"
-        });
-      })
-  });
-})
+        req.login(newUser, err => {
+            if (err) next(err);
+            else {
+              if (req.user.truck === "YES") {
+                res.redirect("/auth/add-a-truck");
+              } else {
+                res.redirect("/auth/userprofile");
+              }
+            }
+          })
+          .catch(err => {
+            res.render("auth/signup", {
+              message: "Something went wrong"
+            });
+          })
+      });
+  })
 });
 
 
@@ -136,7 +143,9 @@ router.post("/signup", (req, res, next) => {
 
 
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
-  res.render("../views/auth/add-a-truck", {loggedIn: req.user});
+  res.render("../views/auth/add-a-truck", {
+    loggedIn: req.user
+  });
 });
 
 
@@ -177,12 +186,14 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
 
 router.get("/:id/truck", (req, res) => {
   Truck.findById(req.params.id)
-  .then(truck => {
-  res.render("auth/truck", {
-    truck: truck,
-    loggedIn: req.user
-  })
-  });
+    .then(truck => {
+      res.render("auth/truck", {
+        truck: truck,
+        loggedIn: req.user,
+        userIsOwner: req.user._id.toString() === truck.owner.toString()
+
+      })
+    });
 });
 
 router.get("/:id/truck/delete", (req, res) => {
@@ -209,26 +220,29 @@ router.get("/userprofile/:id/delete", (req, res) => {
 
 router.get("/:id/truck/edit", (req, res) => {
   Truck.findById(req.params.id)
-  .then(truck => {
-    res.render("auth/edit-truck", {truck: truck,
-      loggedIn: req.user});
-  })
+    .then(truck => {
+      res.render("auth/edit-truck", {
+        truck: truck,
+        loggedIn: req.user
+      });
+    })
 });
 
 router.post("/:id/truck/edit", (req, res) => {
-  Truck.updateOne({_id: req.params.id},
-  {
-    name: req.body.name,
-    description: req.body.description,
-    menu: req.body.menu,
-    hours: req.body.hours
-  })
-  .then(truck => {
-    res.redirect("/auth/" + req.params.id + "/truck");
-  })
-  .catch(err => {
-    console.log(err);
-  })
+  Truck.updateOne({
+      _id: req.params.id
+    }, {
+      name: req.body.name,
+      description: req.body.description,
+      menu: req.body.menu,
+      hours: req.body.hours
+    })
+    .then(truck => {
+      res.redirect("/auth/" + req.params.id + "/truck");
+    })
+    .catch(err => {
+      console.log(err);
+    })
 });
 
 router.get("/logout", (req, res) => {

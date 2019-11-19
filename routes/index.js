@@ -4,7 +4,10 @@ const Truck = require("../models/Truck");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('index', {loggedIn: req.user});
+  res.render('index', {
+    loggedIn: req.user,
+    loggedOut: !req.user
+  });
 });
 // })
 
