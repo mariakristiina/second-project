@@ -8,6 +8,15 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+const loginCheck = () => {
+  return (req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect("/auth/login");
+    }
+  }
+}
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", {
@@ -15,16 +24,25 @@ router.get("/login", (req, res, next) => {
   });
 });
 
-router.get("/userprofile", (req, res) => {
 
-  res.render("auth/userprofile");
+router.get("/userprofile", (req, res, next) => {
+  if (req.user.truck === "YES") {
+    res.render("auth/truckprofile", {
+      user: req.user
+    });
+  } else {
+    res.render("auth/userprofile", {
+      user: req.user,
+      truck: req.truck
+    });
+  }
 });
 
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/auth/userprofile",
   failureRedirect: "/auth/login",
   failureFlash: true,
-  passReqToCallback: true
+  passReqToCallback: true,
 }));
 
 router.get("/signup", (req, res, next) => {
@@ -155,7 +173,15 @@ router.get("/truckProfile", (req, res, next) => {
   })
 });
 
+router.get("/edit-truck", loginCheck(), (req, res) => {
+  res.render("auth/edit-truck", {
+    user: req.user
+  });
+})
 
-
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/", {truck: req.truck});
+});
 
 module.exports = router;

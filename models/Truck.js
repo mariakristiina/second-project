@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const truckSchema = new Schema({
   name: String,
+  description: String,
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
