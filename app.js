@@ -16,7 +16,7 @@ const flash = require("connect-flash");
 
 
 mongoose
-  .connect('mongodb://localhost/project2', {
+  .connect('mongodb://localhost/second-project', {
     useNewUrlParser: true
   })
   .then(x => {

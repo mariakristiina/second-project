@@ -2,7 +2,8 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-const Truck = require("../models/Truck")
+const Truck = require("../models/Truck");
+const Location = require("../models/Location");
 
 
 // Bcrypt to encrypt passwords
@@ -121,6 +122,15 @@ router.get("/add-a-truck", loginCheck(), (req, res, next) => {
   res.render("../views/auth/add-a-truck");
 });
 
+
+router.get("/truckProfile", (req, res, next) => {
+  res.render("auth/truckProfile", {
+    message: "your truck has been added!"
+  })
+});
+
+
+
 router.post("/add-a-truck", (req, res, next) => {
   console.log(req.body);
   const {
@@ -131,32 +141,31 @@ router.post("/add-a-truck", (req, res, next) => {
     menu,
     hours
   } = req.body;
+  const location = [req.body.lng, req.body.lat];
   console.log(req.user)
   const owner = req.user._id;
-  // const location = marker.getLngLat();
+
   Truck.create({
       name,
       description,
       cuisine,
       tags,
-      location,
       owner,
+      location,
       menu,
       hours
     })
     .then(() => {
-      res.redirect("/")
+      res.redirect("/auth/truckProfile");
     })
     .catch(err => {
       console.log(err);
     })
 });
 
-router.get("/truckProfile", (req, res, next) => {
-  res.render("/auth/truckProfile", {
-    message: "your truck has been added!"
-  })
-});
+
+
+
 
 router.get("/truck", (req, res) => {
   res.render("auth/truck", {
