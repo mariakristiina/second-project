@@ -1,6 +1,8 @@
-<h1>Truck</h1>
+<h1>{{truck.name}}</h1>
+<h2>{{truck.description}}</h2>
+<h2>Cuisine: {{truck.cuisine}}</h2>
+<h2>Menu: {{truck.menu}}</h2>
+<h3>Opening Hours: {{truck.hours}}</h3>
 
-{{!-- add truck info here --}}
-
-
-<a href="/truck/{{truck._id}}/delete"><button>Delete this Truck</button></a>
+<a href="/auth/{{truck._id}}/truck/edit"><button>Edit this Truck</button></a>
+<a href="/auth/{{truck._id}}/truck/delete"><button>Delete this Truck</button></a>

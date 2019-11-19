@@ -21,11 +21,14 @@
   <nav>
     <a href="/">Home</a>
     <div class="left">
+      {{#if loggedIn}}
+      <a href="/auth/add-a-truck">Add a Truck</a>
+      <a href="/auth/userprofile">Profile</a>
+       {{/if}}
       <a href="/auth/login">Login</a>
       <a href="/auth/signup">Sign Up</a>
       <a href="/auth/logout">Logout</a>
-      <a href="/auth/add-a-truck">Add a Truck</a>
-      <a href="/auth/userprofile">Profile</a>
+
     </div>
   </nav>
 

@@ -5,8 +5,10 @@
 {{!-- need to add the trucks list name from auth.js and the data to show --}}
 {{!-- delete this link and link each truck individually after adding the above --}}
 {{!-- link the truck to the truck id once set up --}}
-<a href="/auth/truck">Your truck no 1</a>
 
-{{!-- {{#each }}
-
-{{/each}} --}}
+{{#each trucks}}
+<div class="truck-list">
+  <p>{{name}}</p>
+<a href="/auth/{{_id}}/truck"><button>Details</button></a>
+</div>
+{{/each}}
