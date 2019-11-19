@@ -6,6 +6,7 @@ const Truck = require("../models/Truck");
 const Location = require("../models/Location");
 
 
+
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -120,7 +121,6 @@ router.post("/signup", (req, res, next) => {
         }
       }
       })
-    })
       .catch(err => {
         res.render("auth/signup", {
           message: "Something went wrong"
@@ -128,6 +128,10 @@ router.post("/signup", (req, res, next) => {
       })
   });
 });
+
+
+
+
 
 
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
@@ -145,19 +149,22 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
     menu,
     hours
   } = req.body;
-  const location = [req.body.lng, req.body.lat];
+
+  const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+  console.log(location);
+
   console.log(req.user)
   const owner = req.user._id;
 
   Truck.create({
-      name,
-      description,
-      cuisine,
-      tags,
-      owner,
-      location,
-      menu,
-      hours
+      name: name,
+      description: description,
+      cuisine: cuisine,
+      tags: tags,
+      owner: owner,
+      locations: location,
+      menu: menu,
+      hours: hours,
     })
     .then(() => {
       res.redirect("/auth/truckProfile");
