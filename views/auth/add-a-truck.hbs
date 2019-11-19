@@ -28,62 +28,32 @@
     <div class="tags">
       <p>Add relevant tags:</p>
       <label for="vegetarian">vegetarian:</label>
-      <input type="checkbox" name="vegetarian" value="vegetarian" id="tags">
+      <input type="checkbox" name="tags" value="vegetarian" id="tags">
       <label for="vegan">vegan:</label>
-      <input type="checkbox" name="vegan" value="vegan" id="tags">
+      <input type="checkbox" name="tags" value="vegan" id="tags">
       <label for="barbeque">barbeque:</label>
-      <input type="checkbox" name="barbeque" value="barbeque" id="tags">
+      <input type="checkbox" name="tags" value="barbeque" id="tags">
       <label for="burger">burger:</label>
-      <input type="checkbox" name="burger" value="burger" id="tags">
+      <input type="checkbox" name="tags" value="burger" id="tags">
       <label for="asian">asian:</label>
-      <input type="checkbox" name="asian" value="asian" id="tags">
+      <input type="checkbox" name="tags" value="asian" id="tags">
       <label for="dumplings">dumplings:</label>
-      <input type="checkbox" name="dumplings" value="dumplings" id="tags">
+      <input type="checkbox" name="tags" value="dumplings" id="tags">
       <label for="pizza">pizza:</label>
-      <input type="checkbox" name="pizza" value="pizza" id="tags">
+      <input type="checkbox" name="tags" value="pizza" id="tags">
       <label for="dessert">dessert:</label>
-      <input type="checkbox" name="dessert" value="dessert" id="tags">
+      <input type="checkbox" name="tags" value="dessert" id="tags">
 
       <br>
-      <label for="location">Location:</label>
-      <input type="text" name="location" id="location">
+      <p>Location:</p>
 
       <div id='map' style='width: 600px; height: 300px;'></div>
-      <script>
+      <script src="/javascripts/add-truck.js"></script>
 
-        mapboxgl.accessToken =
-          'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
-        var map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v9',
-          center: [13.40, 52.52],
-          zoom: 12
-
-        });
-
-        let marker = new mapboxgl.Marker({
-          draggable: true,
-
-        }).setLngLat([13.3890, 52.5169]).addTo(map);
-
-        axios.interceptors.request.use(config => {
-          // perform a task before the request is sent
-          console.log('Request was sent');
-
-          return config;
-        }, error => {
-          // handle the error
-          return Promise.reject(error);
-        });
-
-        // sent a GET request
-        axios.get('https://api.github.com/users/mapbox')
-          .then(response => {
-            console.log(response.data.created_at);
-          });
+      <input type="text" name="lng" id="lng">
+      <input type="text" name="lat" id="lat">
 
 
-      </script>
     </div>
 
     <br>
