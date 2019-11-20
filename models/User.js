@@ -8,7 +8,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  likes: [],
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Truck"
+  }],
 }, {
   timestamps: {
     createdAt: 'created_at',

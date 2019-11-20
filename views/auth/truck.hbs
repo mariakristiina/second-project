@@ -1,4 +1,17 @@
 <h1>{{truck.name}}</h1>
+
+<div class="btn-container">
+<form action="/like/{{truck._id}}" method="post">
+  <button id="like" type="submit" class="like-btn"><img id="like" src="/images/heart-no-color.jpg" alt="heart"></button>
+  {{!-- <script>
+    document.getElementById("like").addEventListener("click", liked);
+    function liked() {
+      document.getElementById("like").src = "/images/Heart.jpg";
+    }
+  </script> --}}
+</form>
+</div>
+
 <h2>{{truck.description}}</h2>
 <h2>Cuisine: {{truck.cuisine}}</h2>
 <h2>Menu: {{truck.menu}}</h2>

@@ -22,9 +22,12 @@
   <nav>
     <a href="/">Home</a>
     <div class="left">
+  
       {{#if loggedIn}}
+   
       <a href="/add-a-truck">Add a Truck</a>
       <a href="/userprofile">Profile</a>
+ 
       <a href="/auth/logout">Logout</a>
       {{/if}}
       {{#if loggedOut}}

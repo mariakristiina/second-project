@@ -149,16 +149,16 @@ router.post("/:id/truck/edit", (req, res) => {
 
 
 router.get("/userprofile", loginCheck(), (req, res, next) => {
-    Truck.find({
-        owner: req.user._id
+  Truck.find({
+      owner: req.user._id
+    })
+    .then(trucks => {
+      res.render("auth/truckProfile", {
+        user: req.user,
+        trucks: trucks,
+        loggedIn: req.user
       })
-      .then(trucks => {
-        res.render("auth/truckProfile", {
-          user: req.user,
-          trucks: trucks,
-          loggedIn: req.user
-        })
-      });
+    });
 });
 
 router.get("/truckProfile", (req, res, next) => {
@@ -172,6 +172,23 @@ router.get("/truckProfile", (req, res, next) => {
       })
     })
 });
+
+router.post("/like/:id", (req, res) => {
+  const truck = req.params.id;
+  if(req.user.likes.includes(truck)) {
+    res.redirect("/" + req.params.id + "/truck");
+  } else {
+  User.updateOne({
+      _id: req.user.id
+    }, {
+      $push: {
+        likes: truck
+      }
+    }, {
+      new: true
+    })
+    .then(updatedUser => console.log(updatedUser));}
+})
 
 
 module.exports = router;
