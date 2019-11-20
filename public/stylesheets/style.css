@@ -19,4 +19,12 @@ nav {
   text-align: center;
   color: #e66558; }
 
+.marker {
+  background-image: url("https://banner2.cleanpng.com/20180516/pqw/kisspng-food-truck-logo-5afbc2cee449b7.7775427115264488469351.jpg");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer; }
+
 /*# sourceMappingURL=style.css.map */
