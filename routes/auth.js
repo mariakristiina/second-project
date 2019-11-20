@@ -42,7 +42,7 @@ router.get("/userprofile", loginCheck(), (req, res, next) => {
         res.render("auth/truckprofile", {
           user: req.user,
           trucks: trucks,
-          loggedIn: req.user
+          loggedIn: req.user,
         })
       });
   } else if (req.user.truck === "NO") {

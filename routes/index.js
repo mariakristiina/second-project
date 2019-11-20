@@ -6,7 +6,7 @@ const Truck = require("../models/Truck");
 router.get('/', (req, res, next) => {
   res.render('index', {
     loggedIn: req.user,
-    loggedOut: !req.user
+    loggedOut: !req.user,
   });
 });
 // })
