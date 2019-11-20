@@ -20,12 +20,6 @@ nav {
   text-align: center;
   color: #e66558; }
 
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%; }
-
 .marker-favorite {
   background-image: url("https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg");
   background-size: cover;

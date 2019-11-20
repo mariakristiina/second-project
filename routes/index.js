@@ -134,13 +134,15 @@ router.get("/:id/truck/edit", (req, res) => {
 });
 
 router.post("/:id/truck/edit", (req, res) => {
+  const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
   Truck.updateOne({
       _id: req.params.id
     }, {
       name: req.body.name,
       description: req.body.description,
       menu: req.body.menu,
-      hours: req.body.hours
+      hours: req.body.hours,
+      locations: location
     })
     .then(truck => {
       res.redirect("/" + req.params.id + "/truck");
@@ -149,6 +151,7 @@ router.post("/:id/truck/edit", (req, res) => {
       console.log(err);
     })
 });
+
 
 
 
