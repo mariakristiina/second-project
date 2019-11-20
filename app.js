@@ -16,7 +16,7 @@ const flash = require("connect-flash");
 
 
 mongoose
-  .connect(process.env.MONGODB_URI ||'mongodb://localhost/second-project', {
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/second-project', {
     useNewUrlParser: true
   })
   .then(x => {
@@ -90,6 +90,7 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
 
 
 module.exports = app;

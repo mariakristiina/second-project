@@ -2,8 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-const Truck = require("../models/Truck");
-const Location = require("../models/Location");
+
 
 
 
@@ -11,19 +10,7 @@ const Location = require("../models/Location");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-const loginCheck = () => {
 
-  return (req, res, next) => {
-
-    if (req.user) {
-      next();
-      console.log("successful login check")
-    } else {
-      console.log(req.body)
-      res.redirect("/auth/login");
-    }
-  }
-}
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", {
@@ -32,38 +19,6 @@ router.get("/login", (req, res, next) => {
   });
 });
 
-
-router.get("/userprofile", loginCheck(), (req, res, next) => {
-  if (req.user.truck === "YES") {
-    Truck.find({
-        owner: req.user._id
-      })
-      .then(trucks => {
-        res.render("auth/truckprofile", {
-          user: req.user,
-          trucks: trucks,
-          loggedIn: req.user,
-        })
-      });
-  } else if (req.user.truck === "NO") {
-    res.render("auth/userprofile", {
-      user: req.user,
-      loggedIn: req.user
-    });
-  }
-});
-
-router.get("/truckProfile", (req, res, next) => {
-  Truck.find({
-      owner: req.user._id
-    })
-    .then(trucks => {
-      res.render("auth/truckProfile", {
-        trucks: trucks,
-        user: req.user
-      })
-    })
-});
 
 
 
@@ -121,10 +76,10 @@ router.post("/signup", (req, res, next) => {
         req.login(newUser, err => {
             if (err) next(err);
             else {
-              if (req.user.truck) {
-                res.redirect("/auth/add-a-truck");
+              if (req.user.truck === "YES") {
+                res.redirect("/add-a-truck");
               } else {
-                res.redirect("/auth/userprofile");
+                res.redirect("/userprofile");
               }
             }
           })
@@ -137,108 +92,9 @@ router.post("/signup", (req, res, next) => {
   })
 });
 
-router.get("/add-a-truck", loginCheck(), (req, res, next) => {
-  res.render("../views/auth/add-a-truck", {
-    loggedIn: req.user
-  });
-});
 
 
-router.post("/add-a-truck", loginCheck(), (req, res, next) => {
-  console.log(req.body);
-  const {
-    name,
-    description,
-    cuisine,
-    tags,
-    menu,
-    hours
-  } = req.body;
 
-  const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
-  console.log(location);
-
-  console.log(req.user)
-  const owner = req.user._id;
-
-  Truck.create({
-      name: name,
-      description: description,
-      cuisine: cuisine,
-      tags: tags,
-      owner: owner,
-      locations: location,
-      menu: menu,
-      hours: hours,
-    })
-    .then(() => {
-      res.redirect("/auth/truckProfile");
-    })
-    .catch(err => {
-      console.log(err);
-    })
-});
-
-router.get("/:id/truck", (req, res) => {
-  Truck.findById(req.params.id)
-    .then(truck => {
-      res.render("auth/truck", {
-        truck: truck,
-        loggedIn: req.user,
-        userIsOwner: req.user._id.toString() === truck.owner.toString()
-
-      })
-    });
-});
-
-router.get("/:id/truck/delete", (req, res) => {
-  const query = req.params.id
-  Truck.findByIdAndDelete(query)
-    .then(() => {
-      res.redirect("/auth/login");
-    })
-    .catch(err => {
-      console.log(err);
-    })
-});
-
-router.get("/userprofile/:id/delete", (req, res) => {
-  const query = req.params.id
-  User.findByIdAndDelete(query)
-    .then(() => {
-      res.redirect("/auth/login");
-    })
-    .catch(err => {
-      console.log(err);
-    })
-});
-
-router.get("/:id/truck/edit", (req, res) => {
-  Truck.findById(req.params.id)
-    .then(truck => {
-      res.render("auth/edit-truck", {
-        truck: truck,
-        loggedIn: req.user
-      });
-    })
-});
-
-router.post("/:id/truck/edit", (req, res) => {
-  Truck.updateOne({
-      _id: req.params.id
-    }, {
-      name: req.body.name,
-      description: req.body.description,
-      menu: req.body.menu,
-      hours: req.body.hours
-    })
-    .then(truck => {
-      res.redirect("/auth/" + req.params.id + "/truck");
-    })
-    .catch(err => {
-      console.log(err);
-    })
-});
 
 router.get("/logout", (req, res) => {
   req.logout();

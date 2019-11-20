@@ -1,22 +1,21 @@
 <h1>Edit Your Truck</h1>
 
 {{#with truck}}
-<form action="/auth/{{_id}}/truck/edit" method="post">
-<label for="name">Name: </label>
-<input type="text" name="name" id="name" value="{{name}}">
+<form action="/{{_id}}/truck/edit" method="post">
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" value="{{name}}">
 
-<label for="description">Description: </label>
-<input type="text" name="description" id="description" value="{{description}}">
+  <label for="description">Description: </label>
+  <input type="text" name="description" id="description" value="{{description}}">
 
 
-<label for="menu">menu: </label>
-<input type="text" name="menu" id="menu" value="{{menu}}">
+  <label for="menu">menu: </label>
+  <input type="text" name="menu" id="menu" value="{{menu}}">
 
-<label for="hours">hours: </label>
-<input type="text" name="hours" id="hours" value="{{hours}}">
+  <label for="hours">hours: </label>
+  <input type="text" name="hours" id="hours" value="{{hours}}">
 
-<button type:"submit">Edit this Truck</button>
+  <button type:"submit">Save Changes</button>
 
 </form>
 {{/with}}
-
