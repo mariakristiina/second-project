@@ -8,6 +8,12 @@
   <label for="description">Description: </label>
   <input type="text" name="description" id="description" value="{{description}}">
 
+  <p>Location:</p>
+  <div id='map' style='width: 600px; height: 300px;'></div>
+  <script src="/javascripts/add-truck.js"></script>
+
+  <input type="text" name="lng" id="lng" style="display: none;">
+  <input type="text" name="lat" id="lat" style="display: none;">
 
   <label for="menu">menu: </label>
   <input type="text" name="menu" id="menu" value="{{menu}}">
@@ -15,7 +21,7 @@
   <label for="hours">hours: </label>
   <input type="text" name="hours" id="hours" value="{{hours}}">
 
-  <button type:"submit">Save Changes</button>
+  <button type="submit">Save Changes</button>
 
 </form>
 {{/with}}

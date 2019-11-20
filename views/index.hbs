@@ -27,28 +27,77 @@
   }));
 
 
+  const getFavorites = () => {
 
-  const getMarkers = () => {
+    return axios.get('/api/getuserfavorites').then(response => {
+      if (!response.data.likes) {
+        return genericMarkers();
+      }
+      const favoriteTrucks = response.data.likes
+      console.log('favorite trucks: ', favoriteTrucks);
+      return favoriteTrucks;
+    });
+  }
 
+  const getMarkers = async () => {
+    const favoriteTrucks = await getFavorites();
+    console.log(favoriteTrucks);
     axios.get('/api/findtrucks').then(response => {
+      console.log('LOOK HEERREEE: ', response.data)
 
-      const coordinates = response.data.map(x => {
-        return x.locations;
+      const nonFavoriteTrucks = response.data.filter(el => {
+        if (favoriteTrucks.includes(el._id)) {
+          return false;
+        } return true;
+      })
+      const likedTrucks = response.data.filter(el => {
+        if (favoriteTrucks.includes(el._id)) {
+          return true;
+        } return false;
       })
 
-      console.log(response.data)
-
-      response.data.forEach(x => {
-        new mapboxgl.Marker().setLngLat(x.locations)
-          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true }) // add popups
-            .setHTML('<a href=/auth/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+      nonFavoriteTrucks.forEach(x => {
+        console.log(x);
+        const markerDiv = document.createElement('div')
+        markerDiv.className = 'marker';
+        new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
           .addTo(map);
       })
+
+
+      likedTrucks.forEach(x => {
+        console.log('liked trucks ', x)
+        const favMarker = document.createElement('div')
+        favMarker.className = 'marker-favorite';
+        new mapboxgl.Marker(favMarker).setLngLat(x.locations)
+          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+          .addTo(map);
+      })
+
 
     }).catch(err => {
       console.log(err)
     })
   }
+
+  const genericMarkers = () => {
+    axios.get('/api/findtrucks').then(response => {
+      console.log('THIS IS THE RESPONSE ', response);
+      response.data.forEach(x => {
+        console.log(x);
+        const markerDiv = document.createElement('div')
+        markerDiv.className = 'marker';
+        new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+          .addTo(map);
+      })
+    });
+  }
+
   getMarkers();
 
 

@@ -24,27 +24,6 @@ marker.on("dragend", () => {
 });
 
 
-// const markerLocate = () => {
-//   marker.on('dragend', () => {
-//     return marker.getLngLat();
-//   })
-// };
-
-
-// console.log(markerLocate());
 
 
 
-
-// axios.interceptors.request.use(config => {
-//   // perform a task before the request is sent
-
-//   //config.markerLocation = markerLocate;
-//   console.log(config);
-//   console.log('Request was sent');
-//   return config;
-// }, error => {
-//   // handle the error
-//   console.log(error);
-//   return Promise.reject(error);
-// });
