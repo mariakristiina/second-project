@@ -101,7 +101,7 @@ router.get("/:id/truck/delete", (req, res) => {
   const query = req.params.id
   Truck.findByIdAndDelete(query)
     .then(() => {
-      res.redirect("/userprofile");
+      res.redirect("/truckProfile");
     })
     .catch(err => {
       console.log(err);
@@ -149,23 +149,16 @@ router.post("/:id/truck/edit", (req, res) => {
 
 
 router.get("/userprofile", loginCheck(), (req, res, next) => {
-  if (req.user.truck === "YES") {
     Truck.find({
         owner: req.user._id
       })
       .then(trucks => {
-        res.render("auth/truckprofile", {
+        res.render("auth/truckProfile", {
           user: req.user,
           trucks: trucks,
           loggedIn: req.user
         })
       });
-  } else if (req.user.truck === "NO") {
-    res.render("auth/userprofile", {
-      user: req.user,
-      loggedIn: req.user
-    });
-  }
 });
 
 router.get("/truckProfile", (req, res, next) => {

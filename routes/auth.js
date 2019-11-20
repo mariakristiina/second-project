@@ -76,10 +76,10 @@ router.post("/signup", (req, res, next) => {
         req.login(newUser, err => {
             if (err) next(err);
             else {
-              if (req.user.truck === "YES") {
+              if (req.user.truck) {
                 res.redirect("/add-a-truck");
               } else {
-                res.redirect("/userprofile");
+                res.redirect("/");
               }
             }
           })
