@@ -29,10 +29,14 @@ const loginCheck = () => {
   }
 }
 
+router.get("/api/getuserfavorites", (req, res, next) => {
+  res.json(req.user);
+});
+
+
 router.get("/api/findtrucks", (req, res, next) => {
   Truck.find()
     .then(response => {
-      // res.json(response.request.response)
       res.json(response);
       // console.log('passed to hbs ',
       //   response.request.response);
@@ -149,16 +153,16 @@ router.post("/:id/truck/edit", (req, res) => {
 
 
 router.get("/userprofile", loginCheck(), (req, res, next) => {
-    Truck.find({
-        owner: req.user._id
+  Truck.find({
+      owner: req.user._id
+    })
+    .then(trucks => {
+      res.render("auth/truckProfile", {
+        user: req.user,
+        trucks: trucks,
+        loggedIn: req.user
       })
-      .then(trucks => {
-        res.render("auth/truckProfile", {
-          user: req.user,
-          trucks: trucks,
-          loggedIn: req.user
-        })
-      });
+    });
 });
 
 router.get("/truckProfile", (req, res, next) => {

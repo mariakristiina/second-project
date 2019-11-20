@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
@@ -8,14 +8,17 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  likes: [],
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Truck"
+  }],
+  location: String
 }, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   },
-  location: String,
-  favorites: [],
+
 });
 
 const User = mongoose.model('User', userSchema);

@@ -21,19 +21,50 @@ nav {
 }
 
 .mapboxgl-popup {
+  width: 20%;
   text-align: center;
   color: rgb(230, 101, 88);
 
 }
 
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.marker-favorite {
+  background-image: url('https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.marker {
+  background-image: url('https://i.pinimg.com/originals/cd/8f/18/cd8f18d6b0896a4084ffd86e14fce007.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
 // from mapbox to style markers:
 // .marker {
-//   background-image: url('https://banner2.cleanpng.com/20180516/pqw/kisspng-food-truck-logo-5afbc2cee449b7.7775427115264488469351.jpg');
+//   // background-image: 'https://banner2.cleanpng.com/20180516/pqw/kisspng-food-truck-logo-5afbc2cee449b7.7775427115264488469351.jpg' !important;
 //   background-size: cover;
 //   width: 50px;
 //   height: 50px;
 //   border-radius: 50%;
 //   cursor: pointer;
+// }
+
+// .mapboxgl-marker {
+//   background-image: url('https://banner2.cleanpng.com/20180516/pqw/kisspng-food-truck-logo-5afbc2cee449b7.7775427115264488469351.jpg');
 // }
 
 // like icon image: https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg
