@@ -55,6 +55,17 @@ nav {
   cursor: pointer;
 }
 
+.btn-container button{
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.delete-button {
+  border: none;
+  background: none;
+  outline: none;
+}
 
 // from mapbox to style markers:
 // .marker {

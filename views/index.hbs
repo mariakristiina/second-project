@@ -2,9 +2,6 @@
 
 {{#if loggedIn}}
 <h1>Welcome {{user.username}}</h1>
-<form action="/userprofile/{{user._id}}/delete" method="post">
-<button>Delete Your Account</button>
-</form>
 {{/if}}
 
 <div id='map' style='width: 800px; height: 600px;'></div>
@@ -103,6 +100,12 @@
 
 
 </script>
+
+{{#if loggedIn}}
+<form action="/userprofile/{{user._id}}/delete" method="post">
+<button class="delete-button">Delete Your Account</button>
+</form>
+{{/if}}
 
 {{!-- response.forEach(truck => {
         const coordinates = truck.locations;

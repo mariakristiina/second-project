@@ -90,15 +90,26 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
 
 
 router.get("/:id/truck", (req, res) => {
+  const truckId = req.params.id;
+  if(req.user) {
+
   Truck.findById(req.params.id)
-    .then(truck => {
+     .then(truck => {
       res.render("auth/truck", {
         truck: truck,
         loggedIn: req.user,
-        userIsOwner: req.user._id.toString() === truck.owner.toString()
-
-      })
+        userIsOwner: req.user._id.toString() === truck.owner.toString(),
+        notOwner: req.user._id.toString() !== truck.owner.toString(),
+        like: req.user.likes.includes(truckId),
+        notLiked: !req.user.likes.includes(truckId),
+      }) 
     });
+  } else {Truck.findById(req.params.id)
+    .then(truck => {
+     res.render("auth/truck", {
+       truck: truck
+     }) 
+   });}
 });
 
 router.get("/:id/truck/delete", (req, res) => {
@@ -183,18 +194,21 @@ router.get("/truckProfile", (req, res, next) => {
 router.post("/like/:id", (req, res) => {
   const truck = req.params.id;
   if(req.user.likes.includes(truck)) {
+    User.updateOne({_id: req.user.id}, {$pull: {likes: truck}})
+    .then(updatedTruck => console.log(updatedTruck));
     res.redirect("/" + req.params.id + "/truck");
   } else {
+
   User.updateOne({
       _id: req.user.id
     }, {
       $push: {
         likes: truck
       }
-    }, {
-      new: true
     })
-    .then(updatedUser => console.log(updatedUser));}
+    .then(updatedUser => console.log(updatedUser));
+    res.redirect("/" + req.params.id + "/truck");
+  }
 })
 
 

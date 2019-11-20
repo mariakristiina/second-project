@@ -1,24 +1,31 @@
 <h1>{{truck.name}}</h1>
 
+{{#if loggedIn}}
+{{#if notOwner}}
 <div class="btn-container">
+  {{#if notLiked}}
 <form action="/like/{{truck._id}}" method="post">
-  <button id="like" type="submit" class="like-btn"><img id="like" src="/images/heart-no-color.jpg" alt="heart"></button>
-  {{!-- <script>
-    document.getElementById("like").addEventListener("click", liked);
-    function liked() {
-      document.getElementById("like").src = "/images/Heart.jpg";
-    }
-  </script> --}}
-</form>
+  <button type="submit" class="like-btn"><img id="like" src="/images/heart-no-color.jpg" alt="heart"></button>
+  </form>
+{{else}}
+<form action="/like/{{truck._id}}" method="post">
+  <button type="submit" class="like-btn"><img id="like" src="/images/Heart.jpg" alt="heart"></button>
+  </form>
+{{/if}}
+{{/if}}
+{{/if}}
 </div>
 
+<img src="{{truck.imageURL}}" alt="truck-image">
 <h2>{{truck.description}}</h2>
 <h2>Cuisine: {{truck.cuisine}}</h2>
 <h2>Menu: {{truck.menu}}</h2>
 <h3>Opening Hours: {{truck.hours}}</h3>
 
+{{#if loggedIn}}
 {{#if userIsOwner}}
 <a href="/{{truck._id}}/truck/edit"><button>Edit this Truck</button></a>
 <a href="/{{truck._id}}/truck/delete"><button>Delete this Truck</button></a>
 
+{{/if}}
 {{/if}}

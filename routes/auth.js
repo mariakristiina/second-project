@@ -15,11 +15,10 @@ const bcryptSalt = 10;
 router.get("/login", (req, res, next) => {
   res.render("auth/login", {
     user: req.user,
+
     message: req.flash("error")
   });
 });
-
-
 
 
 router.post("/login", passport.authenticate("local", {

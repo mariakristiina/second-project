@@ -20,6 +20,9 @@ nav {
   text-align: center;
   color: #e66558; }
 
+#like {
+  height: 5vh; }
+
 .marker-favorite {
   background-image: url("https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg");
   background-size: cover;
@@ -35,5 +38,15 @@ nav {
   height: 50px;
   border-radius: 50%;
   cursor: pointer; }
+
+.btn-container button {
+  border: none;
+  background: none;
+  outline: none; }
+
+.delete-button {
+  border: none;
+  background: none;
+  outline: none; }
 
 /*# sourceMappingURL=style.css.map */
