@@ -1,5 +1,5 @@
 <h1>User profile</h1>
 <h1>Welcome {{user.username}}</h1>
 
-<a href="/auth/userprofile/{{user._id}}/delete"><button>Delete Your Account</button></a>
-
+<form action="/userprofile/{{user._id}}/delete" method="POST">
+  <button type="submit">Delete Your Account</button></form>
