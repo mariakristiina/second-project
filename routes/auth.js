@@ -121,7 +121,7 @@ router.post("/signup", (req, res, next) => {
         req.login(newUser, err => {
             if (err) next(err);
             else {
-              if (req.user.truck === "YES") {
+              if (req.user.truck) {
                 res.redirect("/auth/add-a-truck");
               } else {
                 res.redirect("/auth/userprofile");
@@ -136,11 +136,6 @@ router.post("/signup", (req, res, next) => {
       });
   })
 });
-
-
-
-
-
 
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
   res.render("../views/auth/add-a-truck", {

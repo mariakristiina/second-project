@@ -5,9 +5,10 @@ const userSchema = new Schema({
   username: String,
   password: String,
   truck: {
-    type: String,
-    enum: ["YES", "NO"],
+    type: Boolean,
+    default: false,
   },
+  likes: [],
 }, {
   timestamps: {
     createdAt: 'created_at',

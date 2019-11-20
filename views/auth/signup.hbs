@@ -11,10 +11,7 @@
   <br><br>
 
   <label for="truck">I have a truck</label>
-  <select name="truck" id="truck">
-    <option value="YES">YES</option>
-    <option value="NO">NO</option>
-  </select>
+    <input type="checkbox" name="truck" value="true" id="truck">
   <br>
 
   {{#if message }}
@@ -25,8 +22,4 @@
 
   <button>Create an account</button>
 
-  <p class="account-message">
-    Don't have an account yet?
-    <a href="/auth/signup">Signup</a>
-  </p>
 </form>
