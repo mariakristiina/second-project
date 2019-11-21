@@ -147,7 +147,7 @@
     const genericMarkersWithSearch = () => {
       console.log('function generic markers is called. Logged out')
       const searchText = document.getElementById('searchbar').value;
-      
+
       axios.get(`/api/${searchText}`).then(response => {
         console.log('NEW RESPONSE: ', response)
         response.data.forEach(x => {
@@ -188,11 +188,11 @@
 </div>
 
 <div class="account-deletion">
-{{#if loggedIn}}
-<form action="/userprofile/{{user._id}}/delete" method="post">
-  <button class="delete-button">Delete Your Account</button>
-</form>
-{{/if}}
+  {{#if loggedIn}}
+  <form action="/userprofile/{{user._id}}/delete" method="post">
+    <button class="delete-button">Delete Your Account</button>
+  </form>
+  {{/if}}
 </div>
 {{!-- response.forEach(truck => {
         const coordinates = truck.locations;
