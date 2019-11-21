@@ -107,7 +107,8 @@ body {
   margin: 2vh 4vw;
   padding: 2vh 2vw;
   text-align: center;
-  background: rgba(0, 0, 0, 0.4); }
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px; }
 
 .truck-list h2 {
   font-size: 3em;
@@ -122,6 +123,7 @@ body {
   border: none;
   font-size: 1.8em;
   color: #6ec5ae;
-  outline: none; }
+  outline: none;
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */
