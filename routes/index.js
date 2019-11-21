@@ -244,32 +244,40 @@ router.post("/like/:id", (req, res) => {
 router.get('/api/:searchtext', (req, res, next) => {
   const searchText = req.params.searchtext;
   console.log("backend", searchText);
-  Truck.find({
-      name: searchText
-    })
-    .then(response => {
-      User.findById(req.user._id).then(user => {
-        const favoriteSearchedTrucks = response.filter(truck => {
-          if (user.likes.includes(truck._id)) {
-            return true;
-          }
-          return false;
-        })
-        const nonfavoriteSearchedTrucks = response.filter(truck => {
-          if (user.likes.includes(truck._id)) {
-            return false;
-          }
-          return true;
-        })
-        return [favoriteSearchedTrucks, nonfavoriteSearchedTrucks];
-      }).then(newarray => {
-        console.log('backend result', response)
-        res.json(newarray);
 
+  if (req.user) {
+    Truck.find({
+        name: searchText
       })
+      .then(response => {
+        User.findById(req.user._id).then(user => {
+          const favoriteSearchedTrucks = response.filter(truck => {
+            if (user.likes.includes(truck._id)) {
+              return true;
+            }
+            return false;
+          })
+          const nonfavoriteSearchedTrucks = response.filter(truck => {
+            if (user.likes.includes(truck._id)) {
+              return false;
+            }
+            return true;
+          })
+          return [favoriteSearchedTrucks, nonfavoriteSearchedTrucks];
+        }).then(newarray => {
+          console.log('backend result', response)
+          res.json(newarray);
 
-
+        })
+      })
+  } else {
+    Truck.find({
+      name: searchText
+    }).then(response => {
+      console.log('backend result', response)
+      res.json(response);
     })
+  }
 });
 
 

@@ -36,8 +36,6 @@
       test.forEach(el => {
         el.remove();
       });
-
-
       console.log('handelsubmit has been called');
       const searchText = document.getElementById('searchbar').value;
       console.log('--------------------- ', searchText)
@@ -81,7 +79,10 @@
     const getMarkers = async () => {
       console.log('HELLO')
       const favoriteTrucks = await getFavorites();
-      console.log(favoriteTrucks);
+      console.log('HERE HERE: ', favoriteTrucks);
+      if (!favoriteTrucks) {
+        return genericMarkers();
+      }
       axios.get('/api/findtrucks').then(response => {
         console.log('ALLLLL trucks: ', response.data)
 
