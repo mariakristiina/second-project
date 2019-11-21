@@ -1,27 +1,39 @@
+<div class="add-container">
 <h1>Edit Your Truck</h1>
 
 {{#with truck}}
 <form action="/{{_id}}/truck/edit" method="post">
+<div class="label">
   <label for="name">Name: </label>
   <input type="text" name="name" id="name" value="{{name}}">
+  </div>
 
+<div class="label">
   <label for="description">Description: </label>
   <input type="text" name="description" id="description" value="{{description}}">
+</div>
 
+<div class="label">
   <p>Location:</p>
   <div id='map' style='width: 600px; height: 300px;'></div>
   <script src="/javascripts/add-truck.js"></script>
 
   <input type="text" name="lng" id="lng" style="display: none;">
   <input type="text" name="lat" id="lat" style="display: none;">
+</div>
 
-  <label for="menu">menu: </label>
+<div class="label">
+  <label for="menu">Menu: </label>
   <input type="text" name="menu" id="menu" value="{{menu}}">
+</div>
 
-  <label for="hours">hours: </label>
+<div class="label">
+  <label for="hours">Hours: </label>
   <input type="text" name="hours" id="hours" value="{{hours}}">
+  </div>
 
-  <button type="submit">Save Changes</button>
+  <button class="btn-add-truck" type="submit">Save Changes</button>
 
 </form>
 {{/with}}
+</div>

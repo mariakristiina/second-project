@@ -118,7 +118,7 @@ nav {
 
 }
 
-.navbar>a {
+.navbar a {
   // color: #fcba03;
   color: rgb(201, 211, 218);
   text-decoration: none;
@@ -239,6 +239,146 @@ font-size: 4vw;
 
 .info {
   margin-top: 2vh;
+}
+
+.info p {
+  padding-bottom: .2vh;
+}
+
+.cuisine {
+  font-size: 4.5vw;
+}
+
+.hours {
+  font-size: 3vw;
+}
+
+// login and signup
+
+.log-sign {
+  font-size: 7vw;
+  text-align: center;
+  color: rgb(75, 28, 30);
+}
+
+.login-signup-container {
+  margin:0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+}
+
+.label-truck{
+  display: flex;
+  flex: row;
+  font-size: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(75, 28, 30);
+}
+
+.label input {
+  margin-top:1vh;
+  width: 30vw;
+  height: 3vh;
+}
+
+.label label {
+  font-size: 3vw;
+  color: rgb(75, 28, 30);
+}
+
+.error-message {
+  margin-top: 2vh;
+  font-size: 3vw;
+}
+
+.login-signin-button {
+  background: none;
+  border: none;
+  font-size: 3vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding-bottom: 2vh;
+}
+
+.account-message {
+  font-size: 1.5vw;
+  margin-top: 2vh;
+  text-decoration: none;
+  color: rgb(75, 28, 30);
+}
+
+.account-message a {
+  text-decoration: none;
+  color: #6ec5ae;
+}
+
+// add-a-truck.hbs
+
+
+.add-container {
+  margin:0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.adding-a-truck {
+  font-size: 7vw;
+  text-align: center;
+  color: rgb(75, 28, 30);
+}
+
+.btn-add-truck {
+  background: none;
+  border: none;
+  font-size: 3vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding-bottom: 2vh;
+}
+
+.label select {
+  margin-top:1vh;
+  width: 30vw;
+  height: 3vh;
+}
+
+.label p {
+  font-size: 3vw;
+  color: rgb(75, 28, 30);
+}
+
+.tags label{
+font-size: 2vw;
+}
+
+.tags{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 3vw;
+  color: rgb(75, 28, 30);
+}
+
+.tag {
+  display: flex;
+  flex: row;
+  font-size: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(75, 28, 30);
 }
 
 // style='width: 800px; height: 600px;'

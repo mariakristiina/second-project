@@ -74,7 +74,7 @@ nav {
   display: flex;
   justify-content: flex-end; }
 
-.navbar > a {
+.navbar a {
   color: #c9d3da;
   text-decoration: none;
   font-size: 1.3em; }
@@ -172,5 +172,119 @@ body {
 
 .info {
   margin-top: 2vh; }
+
+.info p {
+  padding-bottom: .2vh; }
+
+.cuisine {
+  font-size: 4.5vw; }
+
+.hours {
+  font-size: 3vw; }
+
+.log-sign {
+  font-size: 7vw;
+  text-align: center;
+  color: #4b1c1e; }
+
+.login-signup-container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 30vw; }
+
+.label-truck {
+  display: flex;
+  flex: row;
+  font-size: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  color: #4b1c1e; }
+
+.label input {
+  margin-top: 1vh;
+  width: 30vw;
+  height: 3vh; }
+
+.label label {
+  font-size: 3vw;
+  color: #4b1c1e; }
+
+.error-message {
+  margin-top: 2vh;
+  font-size: 3vw; }
+
+.login-signin-button {
+  background: none;
+  border: none;
+  font-size: 3vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding-bottom: 2vh; }
+
+.account-message {
+  font-size: 1.5vw;
+  margin-top: 2vh;
+  text-decoration: none;
+  color: #4b1c1e; }
+
+.account-message a {
+  text-decoration: none;
+  color: #6ec5ae; }
+
+.add-container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+
+.adding-a-truck {
+  font-size: 7vw;
+  text-align: center;
+  color: #4b1c1e; }
+
+.btn-add-truck {
+  background: none;
+  border: none;
+  font-size: 3vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding-bottom: 2vh; }
+
+.label select {
+  margin-top: 1vh;
+  width: 30vw;
+  height: 3vh; }
+
+.label p {
+  font-size: 3vw;
+  color: #4b1c1e; }
+
+.tags label {
+  font-size: 2vw; }
+
+.tags {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 3vw;
+  color: #4b1c1e; }
+
+.tag {
+  display: flex;
+  flex: row;
+  font-size: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  color: #4b1c1e; }
 
 /*# sourceMappingURL=style.css.map */
