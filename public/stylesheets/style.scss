@@ -136,10 +136,49 @@ body {
 
 }
 
+.img-truck-pro {
+  width: 30vw;
+  height: 30vh;
+  object-fit: scale-down;
+  position: relative;
+}
 
+.trucks-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 2vh 4vw;
+  
+}
+.truck-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 2vh 4vw;
+  padding: 2vh 2vw;
+  text-align: center;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, .4);
+}
 
+.truck-list h2 {
+  font-size: 3em;
+  width: 30vw;
+}
 
+.trucks-h1 {
+  font-size: 5em;
+  text-align: center;
+}
 
+.details {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  color: #6ec5ae;
+  outline: none;
+}
 
 // style='width: 800px; height: 600px;'
 
