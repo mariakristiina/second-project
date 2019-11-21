@@ -1,15 +1,36 @@
-<h1>Find a Foodtruck!</h1>
+<div class="heading">
+  <h1>Find a Foodtruck!</h1>
+</div>
+<div class="colorone"></div>
+<div class="colortwo"></div>
+<div class="colorthree"></div>
 
 {{#if loggedIn}}
 <h1>Welcome {{user.username}}</h1>
 <form action="/userprofile/{{user._id}}/delete" method="post">
-<button>Delete Your Account</button>
+  <button>Delete Your Account</button>
 </form>
 {{/if}}
 
-<div id='map' style='width: 800px; height: 600px;'></div>
+{{!-- search bar --}}
+<form onsubmit="handlesubmit()">
 
+  <label class="hidden" for="searchbar"></label>
+  <input class="hidden" type="text" name="searchbar" id="searchbar" value="search">
+</form>
+
+
+<div id='map' style='width: 800px; height: 600px;'></div>
 <script>
+
+  function handlesubmit() {
+    const searchText = document.getElementById('searchbar').value;
+    return axios.get(`/api/${searchText}`)
+      .then(data => {
+        console.log("search result", data);
+      })
+  }
+
   mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
   var map = new mapboxgl.Map({
     container: 'map',
@@ -96,13 +117,15 @@
           .addTo(map);
       })
     });
-  }
+  };
 
   getMarkers();
 
 
 
 </script>
+
+
 
 {{!-- response.forEach(truck => {
         const coordinates = truck.locations;

@@ -20,6 +20,9 @@ nav {
   text-align: center;
   color: #e66558; }
 
+#like {
+  height: 5vh; }
+
 .marker-favorite {
   background-image: url("https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg");
   background-size: cover;
@@ -35,5 +38,23 @@ nav {
   height: 50px;
   border-radius: 50%;
   cursor: pointer; }
+
+.hidden {
+  display: none; }
+
+.colorone {
+  background-color: #6ec5ae;
+  height: 20vh;
+  width: 20vh; }
+
+.colortwo {
+  background-color: #fcba03;
+  height: 20vh;
+  width: 20vh; }
+
+.colorthree {
+  background-color: #3c293f;
+  height: 20vh;
+  width: 20vh; }
 
 /*# sourceMappingURL=style.css.map */

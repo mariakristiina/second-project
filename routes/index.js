@@ -29,22 +29,7 @@ const loginCheck = () => {
   }
 }
 
-router.get("/api/getuserfavorites", (req, res, next) => {
-  res.json(req.user);
-});
 
-
-router.get("/api/findtrucks", (req, res, next) => {
-  Truck.find()
-    .then(response => {
-      res.json(response);
-      // console.log('passed to hbs ',
-      //   response.request.response);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
 
 //create a truck
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
@@ -182,19 +167,50 @@ router.get("/truckProfile", (req, res, next) => {
 
 router.post("/like/:id", (req, res) => {
   const truck = req.params.id;
-  if(req.user.likes.includes(truck)) {
+  if (req.user.likes.includes(truck)) {
     res.redirect("/" + req.params.id + "/truck");
   } else {
-  User.updateOne({
-      _id: req.user.id
-    }, {
-      $push: {
-        likes: truck
-      }
-    }, {
-      new: true
+    User.updateOne({
+        _id: req.user.id
+      }, {
+        $push: {
+          likes: truck
+        }
+      }, {
+        new: true
+      })
+      .then(updatedUser => console.log(updatedUser));
+  }
+})
+
+router.get("/api/getuserfavorites", (req, res, next) => {
+  res.json(req.user);
+});
+
+
+router.get("/api/findtrucks", (req, res, next) => {
+  Truck.find()
+    .then(response => {
+      res.json(response);
+      // console.log('passed to hbs ',
+      //   response.request.response);
     })
-    .then(updatedUser => console.log(updatedUser));}
+    .catch(err => {
+      next(err);
+    });
+});
+
+
+router.get('/api/:searchtext', (req, res, next) => {
+  const searchText = req.params.searchtext;
+  console.log("backend", searchText);
+  Truck.find({
+      name: searchText
+    })
+    .then(response => {
+      console.log('backend result', response)
+      res.json(response);
+    })
 })
 
 
