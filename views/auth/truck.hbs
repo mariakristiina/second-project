@@ -1,4 +1,4 @@
-<h1>{{truck.name}}</h1>
+<h1 class="trucks-h1">{{truck.name}}</h1>
 
 {{#if loggedIn}}
 {{#if notOwner}}
@@ -24,8 +24,8 @@
 
 {{#if loggedIn}}
 {{#if userIsOwner}}
-<a href="/{{truck._id}}/truck/edit"><button>Edit this Truck</button></a>
-<a href="/{{truck._id}}/truck/delete"><button>Delete this Truck</button></a>
+<a href="/{{truck._id}}/truck/edit"><button class="edit-truck">Edit this Truck</button></a>
+<a href="/{{truck._id}}/truck/delete"><button class="edit-truck">Delete this Truck</button></a>
 
 {{/if}}
 {{/if}}
