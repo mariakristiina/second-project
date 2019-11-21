@@ -83,7 +83,7 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
       image: image,
     })
     .then(() => {
-      res.redirect("/truckProfile");
+      res.redirect("/truckprofile");
     })
     .catch(err => {
       console.log(err);
@@ -118,7 +118,7 @@ router.get("/:id/truck/delete", (req, res) => {
   const query = req.params.id
   Truck.findByIdAndDelete(query)
     .then(() => {
-      res.redirect("/truckProfile");
+      res.redirect("/truckprofile");
     })
     .catch(err => {
       console.log(err);
@@ -173,7 +173,7 @@ router.get("/userprofile", loginCheck(), (req, res, next) => {
       owner: req.user._id
     })
     .then(trucks => {
-      res.render("auth/truckProfile", {
+      res.render("auth/truckprofile", {
         user: req.user,
         trucks: trucks,
         loggedIn: req.user
@@ -186,7 +186,7 @@ router.get("/truckProfile", (req, res, next) => {
       owner: req.user._id
     })
     .then(trucks => {
-      res.render("auth/truckProfile", {
+      res.render("auth/truckprofile", {
         trucks: trucks,
         user: req.user
       })

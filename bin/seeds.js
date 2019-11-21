@@ -51,22 +51,46 @@ let users = [{
 
 // seeds for food trucks
 
-const truckSeeds = [{
+const userSeeds = [{
+  username: String,
+  password: String,
+  truck: {
+    type: Boolean,
+    default: false,
+  },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Truck"
+  }],
+}]
 
+const truckSeeds = [
+  {
   name: "Zwei Dicke Bärren",
-  // owner: null,
-  // cuisine: null,
+  description: "",
+  cuisine: "",
+  owner: { 
+    username: String,
+    password: String,
+    truck: true,
+    likes: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Truck"
+    }]   
+  },
   tags: "dessert",
   locations: {
     locations: [
-      [52.501972, 13.431725]
-    ],
-    // owner: null
+      [52.3125, 13.2603]
+    ]
   },
-  rating: 8,
-  // menu: null,
-  hours: [12, 19]
-}, {
+  hours: [12, 19],
+  image: "https://img.theculturetrip.com/1024x/wp-content/uploads/2016/08/dsc05253.jpg",
+  rating: "",
+}, 
+
+
+{
   name: "Big Stuff Smoked BBQ",
   owner: null,
   cuisine: "American",
