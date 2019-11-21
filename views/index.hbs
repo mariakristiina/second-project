@@ -31,6 +31,7 @@
     }
 
     async function handlesubmit(e) {
+      console.log('function called logged in?????')
       e.preventDefault()
       let test = document.querySelectorAll('.marker, .marker-favorite');
       test.forEach(el => {
@@ -38,15 +39,19 @@
       });
       console.log('handelsubmit has been called');
       const searchText = document.getElementById('searchbar').value;
-      console.log('--------------------- ', searchText)
-      if (!searchText.trim()) {
+      const searchCheck = searchText.trim().split(' ')
+      console.log('--------------------- ', searchText.trim().split(' '))
+      if (!searchCheck[0]) {
         console.log('Empty')
         getMarkers()
       }
       else {
-        axios.get(`/api/${searchText}`)
+        axios.post(`/api/searchtext`, { searchCheck })
           .then(data => {
             console.log("search result: ", data.data);
+            console.log('user??? ', data.user)
+            if (!data.user) { return genericMarkersWithSearch(); }
+
             const favoriteTrucks = data.data[0];
             const nonFavoriteTrucks = data.data[1];
 
@@ -138,6 +143,25 @@
         })
       });
     };
+
+    const genericMarkersWithSearch = () => {
+      console.log('function generic markers is called. Logged out')
+      const searchText = document.getElementById('searchbar').value;
+      
+      axios.get(`/api/${searchText}`).then(response => {
+        console.log('NEW RESPONSE: ', response)
+        response.data.forEach(x => {
+
+          const markerDiv = document.createElement('div')
+          markerDiv.className = 'marker';
+          new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+            .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+              .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+            .addTo(map);
+        })
+      })
+    }
+
 
     if (!inputText) {
       mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';

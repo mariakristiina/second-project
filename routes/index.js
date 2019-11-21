@@ -196,7 +196,7 @@ router.get("/api/findtrucks", (req, res, next) => {
     })
     .catch(err => {
       next(err);
-    });
+    })
 });
 
 
@@ -241,6 +241,46 @@ router.post("/like/:id", (req, res) => {
 //   })
 // });
 
+router.post('/api/searchtext', (req, res) => {
+  console.log(req.body.searchCheck)
+
+  const searchText = req.body.searchCheck.join(' ')
+  console.log('BACKEBND KJHFJDHFDKJSHFDJKSF', searchText)
+  console.log('USER IS HEREEEEEEE?', req.user)
+  if (req.user) {
+    Truck.find({
+        name: searchText
+      })
+      .then(response => {
+        User.findById(req.user._id).then(user => {
+          const favoriteSearchedTrucks = response.filter(truck => {
+            if (user.likes.includes(truck._id)) {
+              return true;
+            }
+            return false;
+          })
+          const nonfavoriteSearchedTrucks = response.filter(truck => {
+            if (user.likes.includes(truck._id)) {
+              return false;
+            }
+            return true;
+          })
+          return [favoriteSearchedTrucks, nonfavoriteSearchedTrucks];
+        }).then(newarray => {
+          console.log('backend result', response)
+          res.json(newarray);
+        })
+      })
+  } else {
+    Truck.find({
+      name: searchText
+    }).then(response => {
+      console.log('backend result', response)
+      res.json(response);
+    })
+  }
+})
+
 router.get('/api/:searchtext', (req, res, next) => {
   const searchText = req.params.searchtext;
   console.log("backend", searchText);
@@ -267,7 +307,6 @@ router.get('/api/:searchtext', (req, res, next) => {
         }).then(newarray => {
           console.log('backend result', response)
           res.json(newarray);
-
         })
       })
   } else {
