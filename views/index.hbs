@@ -16,7 +16,7 @@
 
   <div id='map'></div>
   <script>
-    const searchText = document.getElementById('searchbar').value;
+    const inputText = document.getElementById('searchbar').value;
 
     const getFavorites = () => {
 
@@ -32,61 +32,58 @@
 
     async function handlesubmit(e) {
       e.preventDefault()
-      mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
-      var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapboxproject/ck38ygs9q0zaf1cpcnowif80f',
-        center: [13.40, 52.52],
-        zoom: 12
-
+      let test = document.querySelectorAll('.marker, .marker-favorite');
+      test.forEach(el => {
+        el.remove();
       });
 
-      map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      }));
 
       console.log('handelsubmit has been called');
       const searchText = document.getElementById('searchbar').value;
-      axios.get(`/api/${searchText}`)
-        .then(data => {
-          console.log("search result: ", data.data);
-          const favoriteTrucks = data.data[0];
-          const nonFavoriteTrucks = data.data[1];
+      console.log('--------------------- ', searchText)
+      if (!searchText.trim()) {
+        console.log('Empty')
+        getMarkers()
+      }
+      else {
+        axios.get(`/api/${searchText}`)
+          .then(data => {
+            console.log("search result: ", data.data);
+            const favoriteTrucks = data.data[0];
+            const nonFavoriteTrucks = data.data[1];
 
-          nonFavoriteTrucks.forEach(x => {
-            const markerDiv = document.createElement('div')
-            markerDiv.className = 'marker';
-            new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
-              .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
-                .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
-              .addTo(map);
-          })
+            nonFavoriteTrucks.forEach(x => {
+              const markerDiv = document.createElement('div')
+              markerDiv.className = 'marker';
+              new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+                .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+                  .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+                .addTo(map);
+            })
 
 
-          favoriteTrucks.forEach(x => {
-            console.log('liked trucks ', x)
-            const favMarker = document.createElement('div')
-            favMarker.className = 'marker-favorite';
-            new mapboxgl.Marker(favMarker).setLngLat(x.locations)
-              .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
-                .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
-              .addTo(map);
-          })
-
-        });
+            favoriteTrucks.forEach(x => {
+              console.log('liked trucks ', x)
+              const favMarker = document.createElement('div')
+              favMarker.className = 'marker-favorite';
+              new mapboxgl.Marker(favMarker).setLngLat(x.locations)
+                .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+                  .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+                .addTo(map);
+            })
+          });
+      }
     }
 
 
 
 
     const getMarkers = async () => {
+      console.log('HELLO')
       const favoriteTrucks = await getFavorites();
       console.log(favoriteTrucks);
       axios.get('/api/findtrucks').then(response => {
-        console.log('all trucks: ', response.data)
+        console.log('ALLLLL trucks: ', response.data)
 
         const nonFavoriteTrucks = response.data.filter(el => {
           if (favoriteTrucks.includes(el._id)) {
@@ -140,8 +137,8 @@
         })
       });
     };
-    
-    if (!searchText) {
+
+    if (!inputText) {
       mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
       var map = new mapboxgl.Map({
         container: 'map',
