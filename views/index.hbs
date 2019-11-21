@@ -122,12 +122,13 @@
   </script>
 </div>
 
+<div class="account-deletion">
 {{#if loggedIn}}
 <form action="/userprofile/{{user._id}}/delete" method="post">
   <button class="delete-button">Delete Your Account</button>
 </form>
 {{/if}}
-
+</div>
 {{!-- response.forEach(truck => {
         const coordinates = truck.locations;
         new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
