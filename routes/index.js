@@ -29,22 +29,7 @@ const loginCheck = () => {
   }
 }
 
-router.get("/api/getuserfavorites", (req, res, next) => {
-  res.json(req.user);
-});
 
-
-router.get("/api/findtrucks", (req, res, next) => {
-  Truck.find()
-    .then(response => {
-      res.json(response);
-      // console.log('passed to hbs ',
-      //   response.request.response);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
 
 //create a truck
 router.get("/add-a-truck", loginCheck(), (req, res, next) => {
@@ -93,25 +78,27 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
 
 router.get("/:id/truck", (req, res) => {
   const truckId = req.params.id;
-  if(req.user) {
+  if (req.user) {
 
-  Truck.findById(req.params.id)
-     .then(truck => {
-      res.render("auth/truck", {
-        truck: truck,
-        loggedIn: req.user,
-        userIsOwner: req.user._id.toString() === truck.owner.toString(),
-        notOwner: req.user._id.toString() !== truck.owner.toString(),
-        like: req.user.likes.includes(truckId),
-        notLiked: !req.user.likes.includes(truckId),
-      }) 
-    });
-  } else {Truck.findById(req.params.id)
-    .then(truck => {
-     res.render("auth/truck", {
-       truck: truck
-     }) 
-   });}
+    Truck.findById(req.params.id)
+      .then(truck => {
+        res.render("auth/truck", {
+          truck: truck,
+          loggedIn: req.user,
+          userIsOwner: req.user._id.toString() === truck.owner.toString(),
+          notOwner: req.user._id.toString() !== truck.owner.toString(),
+          like: req.user.likes.includes(truckId),
+          notLiked: !req.user.likes.includes(truckId),
+        })
+      });
+  } else {
+    Truck.findById(req.params.id)
+      .then(truck => {
+        res.render("auth/truck", {
+          truck: truck
+        })
+      });
+  }
 });
 
 router.get("/:id/truck/delete", (req, res) => {
@@ -193,22 +180,61 @@ router.get("/truckProfile", (req, res, next) => {
     })
 });
 
+
+
+router.get("/api/getuserfavorites", (req, res, next) => {
+  res.json(req.user);
+});
+
+
+router.get("/api/findtrucks", (req, res, next) => {
+  Truck.find()
+    .then(response => {
+      res.json(response);
+      // console.log('passed to hbs ',
+      //   response.request.response);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+
+router.get('/api/:searchtext', (req, res, next) => {
+  const searchText = req.params.searchtext;
+  console.log("backend", searchText);
+  Truck.find({
+      name: searchText
+    })
+    .then(response => {
+      console.log('backend result', response)
+      res.json(response);
+    })
+});
+
 router.post("/like/:id", (req, res) => {
   const truck = req.params.id;
-  if(req.user.likes.includes(truck)) {
-    User.updateOne({_id: req.user.id}, {$pull: {likes: truck}})
-    .then(updatedTruck => console.log(updatedTruck));
+
+  if (req.user.likes.includes(truck)) {
+    User.updateOne({
+        _id: req.user.id
+      }, {
+        $pull: {
+          likes: truck
+        }
+      })
+      .then(updatedTruck => console.log(updatedTruck));
     res.redirect("/" + req.params.id + "/truck");
   } else {
 
-  User.updateOne({
-      _id: req.user.id
-    }, {
-      $push: {
-        likes: truck
-      }
-    })
-    .then(updatedUser => console.log(updatedUser));
+    User.updateOne({
+        _id: req.user.id
+      }, {
+        $push: {
+          likes: truck
+        }
+      })
+      .then(updatedUser => console.log(updatedUser));
     res.redirect("/" + req.params.id + "/truck");
   }
 })

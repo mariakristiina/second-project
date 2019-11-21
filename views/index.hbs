@@ -1,109 +1,130 @@
-<h1>Find a Foodtruck!</h1>
+<div class="heading">
+  <h1>Find a Foodtruck</h1>
 
-{{#if loggedIn}}
-<h1>Welcome {{user.username}}</h1>
-{{/if}}
+  <div class="colorone"></div>
+  <div class="colortwo"></div>
+  <div class="colorthree"></div>
 
-<div id='map' style='width: 800px; height: 600px;'></div>
+  {{#if loggedIn}}
+  <h1>Welcome {{user.username}}</h1>
+  {{/if}}
 
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
-  var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: [13.40, 52.52],
-    zoom: 12
-
-  });
-
-  map.addControl(new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true
-    },
-    trackUserLocation: true
-  }));
+  {{!-- search bar --}}
+  <form onsubmit="handlesubmit()">
+    <label class="hidden" for="searchbar"></label>
+    <input class="hidden" type="text" name="searchbar" id="searchbar" value="search">
+  </form>
 
 
-  const getFavorites = () => {
+  <div id='map'></div>
+  <script>
 
-    return axios.get('/api/getuserfavorites').then(response => {
-      if (!response.data.likes) {
-        return genericMarkers();
-      }
-      const favoriteTrucks = response.data.likes
-      console.log('favorite trucks: ', favoriteTrucks);
-      return favoriteTrucks;
+    function handlesubmit() {
+      const searchText = document.getElementById('searchbar').value;
+      return axios.get(`/api/${searchText}`)
+        .then(data => {
+          console.log("search result", data);
+        })
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94cHJvamVjdCIsImEiOiJjazJ6eXNqcWIwajd4M21zMDlxamdxYTZpIn0.2yA5cyZqIRxwYPwxku-tUQ';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapboxproject/ck38mhdvv03111ctb27zg6fp6',
+      center: [13.40, 52.52],
+      zoom: 12
+
     });
-  }
 
-  const getMarkers = async () => {
-    const favoriteTrucks = await getFavorites();
-    console.log(favoriteTrucks);
-    axios.get('/api/findtrucks').then(response => {
-      console.log('LOOK HEERREEE: ', response.data)
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
 
-      const nonFavoriteTrucks = response.data.filter(el => {
-        if (favoriteTrucks.includes(el._id)) {
-          return false;
-        } return true;
+
+    const getFavorites = () => {
+
+      return axios.get('/api/getuserfavorites').then(response => {
+        if (!response.data.likes) {
+          return genericMarkers();
+        }
+        const favoriteTrucks = response.data.likes
+        console.log('favorite trucks: ', favoriteTrucks);
+        return favoriteTrucks;
+      });
+    }
+
+    const getMarkers = async () => {
+      const favoriteTrucks = await getFavorites();
+      console.log(favoriteTrucks);
+      axios.get('/api/findtrucks').then(response => {
+        console.log('LOOK HEERREEE: ', response.data)
+
+        const nonFavoriteTrucks = response.data.filter(el => {
+          if (favoriteTrucks.includes(el._id)) {
+            return false;
+          } return true;
+        })
+        const likedTrucks = response.data.filter(el => {
+          if (favoriteTrucks.includes(el._id)) {
+            return true;
+          } return false;
+        })
+
+        nonFavoriteTrucks.forEach(x => {
+          console.log(x);
+          const markerDiv = document.createElement('div')
+          markerDiv.className = 'marker';
+          new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+            .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+              .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+            .addTo(map);
+        })
+
+
+        likedTrucks.forEach(x => {
+          console.log('liked trucks ', x)
+          const favMarker = document.createElement('div')
+          favMarker.className = 'marker-favorite';
+          new mapboxgl.Marker(favMarker).setLngLat(x.locations)
+            .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+              .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+            .addTo(map);
+        })
+
+
+      }).catch(err => {
+        console.log(err)
       })
-      const likedTrucks = response.data.filter(el => {
-        if (favoriteTrucks.includes(el._id)) {
-          return true;
-        } return false;
-      })
+    }
 
-      nonFavoriteTrucks.forEach(x => {
-        console.log(x);
-        const markerDiv = document.createElement('div')
-        markerDiv.className = 'marker';
-        new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
-          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
-            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
-          .addTo(map);
-      })
+    const genericMarkers = () => {
+      axios.get('/api/findtrucks').then(response => {
+        console.log('THIS IS THE RESPONSE ', response);
+        response.data.forEach(x => {
+          console.log(x);
+          const markerDiv = document.createElement('div')
+          markerDiv.className = 'marker';
+          new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
+            .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
+              .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
+            .addTo(map);
+        })
+      });
+    };
 
-
-      likedTrucks.forEach(x => {
-        console.log('liked trucks ', x)
-        const favMarker = document.createElement('div')
-        favMarker.className = 'marker-favorite';
-        new mapboxgl.Marker(favMarker).setLngLat(x.locations)
-          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
-            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
-          .addTo(map);
-      })
-
-
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  const genericMarkers = () => {
-    axios.get('/api/findtrucks').then(response => {
-      console.log('THIS IS THE RESPONSE ', response);
-      response.data.forEach(x => {
-        console.log(x);
-        const markerDiv = document.createElement('div')
-        markerDiv.className = 'marker';
-        new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
-          .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
-            .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
-          .addTo(map);
-      })
-    });
-  }
-
-  getMarkers();
+    getMarkers();
 
 
 
-</script>
+  </script>
+</div>
 
 {{#if loggedIn}}
 <form action="/userprofile/{{user._id}}/delete" method="post">
-<button class="delete-button">Delete Your Account</button>
+  <button class="delete-button">Delete Your Account</button>
 </form>
 {{/if}}
 

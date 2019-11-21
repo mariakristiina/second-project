@@ -20,33 +20,35 @@
 </head>
 
 <body>
+  <div class="everything">
+    <nav>
 
-  <nav>
-    <a href="/">Home</a>
-    <div class="left">
-  
-      {{#if user.truck}}
-      <a href="/add-a-truck">Add a Truck</a>
-      <a href="/userprofile">Profile</a>
-      {{/if}}
+      <div class="navbar">
+        <a href="/">Home</a>
 
-      {{#if loggedIn}}
-      <a href="/auth/logout">Logout</a>
-      {{/if}}
-      {{#if loggedOut}}
-      <a href="/auth/login">Login</a>
-      <a href="/auth/signup">Sign Up</a>
-      {{/if}}
+        {{#if user.truck}}
+        <a href="/add-a-truck">Add a Truck</a>
+        <a href="/userprofile">Profile</a>
+        {{/if}}
 
-
-    </div>
-  </nav>
+        {{#if loggedIn}}
+        <a href="/auth/logout">Logout</a>
+        {{/if}}
+        {{#if loggedOut}}
+        <a href="/auth/login">Login</a>
+        <a href="/auth/signup">Sign Up</a>
+        {{/if}}
 
 
+      </div>
+    </nav>
 
-  {{{body}}}
 
-  <script src="/javascripts/script.js"></script>
+
+    {{{body}}}
+
+    <script src="/javascripts/script.js"></script>
+  </div>
 </body>
 
 </html>
