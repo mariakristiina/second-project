@@ -10,11 +10,7 @@ a {
   color: #00B7FF;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 1vh;
-}
+
 
 .left a {
   padding-right: 2vw;
@@ -30,12 +26,7 @@ nav {
   height: 5vh;
 }
 
-// #map {
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   width: 100%;
-// }
+
 
 .marker-favorite {
   background-image: url('https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg');
@@ -59,26 +50,87 @@ nav {
   display: none;
 }
 
+.btn-container button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.delete-button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  // margin-left: 16%;
+
+}
+
+// .mapboxgl-ctrl-icon.mapboxgl-ctrl-geolocate::before {
+//   position: relative;
+//   margin-top: 20%;
+// }
+
+h1 {
+  color: rgb(75, 28, 30);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 3.5em;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  align-items: center;
+
+}
+
+nav {
+  background-color: rgba(250, 250, 250, 1);
+
+  height: 7vh;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.navbar>a {
+  // color: #fcba03;
+  color: #6ec5ae;
+  text-decoration: none;
+
+  font-size: 1.3em;
+}
+
+.everything {}
+
+body {
+  // background-image: url("https://images.unsplash.com/photo-1496284045406-d3e0b918d7ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80");
+  background-image: url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
+
+}
+
+
+
+
+
+
+// style='width: 800px; height: 600px;'
+
 // colors? :
 //  #fcba03  --yellow
 // #6ec5ae  --bright blue
-// #3c293f  -- dark purple
-
-
-.colorone {
-  background-color: #6ec5ae;
-  height: 20vh;
-  width: 20vh;
-}
-
-.colortwo {
-  background-color: #fcba03;
-  height: 20vh;
-  width: 20vh;
-}
-
-.colorthree {
-  background-color: #3c293f;
-  height: 20vh;
-  width: 20vh;
-}
+// color: rgb(75, 28, 30)  --deep red (title on homepage)
+// #3c293f  -- dark purple rgb(60, 41, 63)

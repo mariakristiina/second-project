@@ -46,7 +46,8 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
     cuisine,
     tags,
     menu,
-    hours
+    hours,
+    image
   } = req.body;
 
   const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
@@ -64,6 +65,7 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
       locations: location,
       menu: menu,
       hours: hours,
+      image: image,
     })
     .then(() => {
       res.redirect("/truckProfile");
@@ -75,15 +77,28 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
 
 
 router.get("/:id/truck", (req, res) => {
-  Truck.findById(req.params.id)
-    .then(truck => {
-      res.render("auth/truck", {
-        truck: truck,
-        loggedIn: req.user,
-        userIsOwner: req.user._id.toString() === truck.owner.toString()
+  const truckId = req.params.id;
+  if (req.user) {
 
-      })
-    });
+    Truck.findById(req.params.id)
+      .then(truck => {
+        res.render("auth/truck", {
+          truck: truck,
+          loggedIn: req.user,
+          userIsOwner: req.user._id.toString() === truck.owner.toString(),
+          notOwner: req.user._id.toString() !== truck.owner.toString(),
+          like: req.user.likes.includes(truckId),
+          notLiked: !req.user.likes.includes(truckId),
+        })
+      });
+  } else {
+    Truck.findById(req.params.id)
+      .then(truck => {
+        res.render("auth/truck", {
+          truck: truck
+        })
+      });
+  }
 });
 
 router.get("/:id/truck/delete", (req, res) => {
@@ -165,23 +180,7 @@ router.get("/truckProfile", (req, res, next) => {
     })
 });
 
-router.post("/like/:id", (req, res) => {
-  const truck = req.params.id;
-  if (req.user.likes.includes(truck)) {
-    res.redirect("/" + req.params.id + "/truck");
-  } else {
-    User.updateOne({
-        _id: req.user.id
-      }, {
-        $push: {
-          likes: truck
-        }
-      }, {
-        new: true
-      })
-      .then(updatedUser => console.log(updatedUser));
-  }
-})
+
 
 router.get("/api/getuserfavorites", (req, res, next) => {
   res.json(req.user);
@@ -211,6 +210,33 @@ router.get('/api/:searchtext', (req, res, next) => {
       console.log('backend result', response)
       res.json(response);
     })
+});
+
+router.post("/like/:id", (req, res) => {
+  const truck = req.params.id;
+
+  if (req.user.likes.includes(truck)) {
+    User.updateOne({
+        _id: req.user.id
+      }, {
+        $pull: {
+          likes: truck
+        }
+      })
+      .then(updatedTruck => console.log(updatedTruck));
+    res.redirect("/" + req.params.id + "/truck");
+  } else {
+
+    User.updateOne({
+        _id: req.user.id
+      }, {
+        $push: {
+          likes: truck
+        }
+      })
+      .then(updatedUser => console.log(updatedUser));
+    res.redirect("/" + req.params.id + "/truck");
+  }
 })
 
 
