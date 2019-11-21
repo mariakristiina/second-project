@@ -148,6 +148,7 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   margin: 2vh 4vw;
+  justify-content: center;
   
 }
 .truck-list {
@@ -158,7 +159,6 @@ body {
   margin: 2vh 4vw;
   padding: 2vh 2vw;
   text-align: center;
-  vertical-align: middle;
   background: rgba(0, 0, 0, .4);
 }
 
