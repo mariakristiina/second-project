@@ -2,7 +2,12 @@
   margin: 0; }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
+  background-repeat: space;
+  font-family: niveau-grotesk, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+  background-size: 100%;
+  background-attachment: fixed; }
 
 a {
   color: #00B7FF; }
@@ -16,7 +21,7 @@ a {
   color: #e66558; }
 
 #like {
-  height: 5vh; }
+  height: 8vh; }
 
 .marker-favorite {
   background-image: url("https://icon-library.net/images/facebook-love-icon-png/facebook-love-icon-png-21.jpg");
@@ -37,18 +42,18 @@ a {
 .hidden {
   display: none; }
 
-.btn-container button {
-  border: none;
-  background: none;
-  outline: none; }
-
 .delete-button {
-  border: none;
   background: none;
-  outline: none; }
+  border: none;
+  font-size: 1.5vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold; }
 
-.img-food {
-  width: 80vw; }
+.account-deletion {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
 
 #map {
   width: 100%;
@@ -59,9 +64,10 @@ h1 {
   color: #4b1c1e;
   padding-top: 2%;
   padding-bottom: 4%;
-  font-size: 3.5em; }
+  font-size: 6vw; }
 
 h2 {
+  font-size: 3vw;
   color: #4b1c1e; }
 
 .heading {
@@ -72,26 +78,28 @@ h2 {
 
 .navbar {
   display: flex;
-  justify-content: space-around;
-  width: 30%;
-  align-items: center; }
-
-nav {
-  background-color: #fafafa;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
   height: 7vh;
-  display: flex;
-  justify-content: flex-end; }
+  background-color: #fafafa; }
 
-.navbar > a {
+.home {
+  padding-left: 2vw; }
+
+.log a {
+  padding-right: 2vw; }
+
+.navbar a {
   color: #c9d3da;
   text-decoration: none;
-  font-size: 1.3em; }
+  font-size: 2.5vw; }
 
-body {
-  background-image: url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
-  background-repeat: space;
-  font-family: niveau-grotesk, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
-  background-size: 100%; }
+.main {
+  margin-top: 7vh; }
 
 .img-truck-pro {
   width: 30vw;
@@ -118,30 +126,236 @@ body {
   border-radius: 30px; }
 
 .truck-list h2 {
-  font-size: 4vw;
+  font-size: 3vw;
   width: 30vw;
   color: #4b1c1e; }
 
 .trucks-h1 {
-  font-size: 7vw;
+  font-size: 6vw;
+  text-align: center;
+  color: #4b1c1e; }
+
+.trucks-h2 {
+  font-size: 4vw;
   text-align: center;
   color: #4b1c1e; }
 
 .details {
   background: none;
   border: none;
-  font-size: 3vw;
-  color: #6ec5ae;
+  font-size: 2.5vw;
+  color: #4b1c1e;
   outline: none;
   font-weight: bold; }
 
+.trucks-h1 {
+  font-size: 4vw; }
+
 .edit-truck {
+  background: none;
+  border: none;
+  font-size: 2vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding: 0vh 2vw; }
+
+.btn-container button {
+  border: none;
+  background: none;
+  outline: none;
+  position: absolute;
+  top: 10vh;
+  left: 80vw; }
+
+.truck-container {
+  display: flex;
+  justify-content: center;
+  margin: 2vh 4vw;
+  padding: 2vh 2vw;
+  text-align: center;
+  background: rgba(250, 250, 250, 0.5);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  margin: 10vh 4vw;
+  justify-content: center;
+  text-align: center; }
+
+.truck-detail {
+  font-size: 3vw; }
+
+.img-food {
+  width: 80vw;
+  height: 40vw;
+  object-fit: scale-down;
+  position: relative; }
+
+.buttons {
+  margin-top: 2vh; }
+
+.info {
+  margin-top: 2vh; }
+
+.info p {
+  padding-bottom: .2vh; }
+
+.cuisine {
+  font-size: 4vw; }
+
+.hours {
+  font-size: 2vw; }
+
+.log-sign {
+  font-size: 7vw;
+  text-align: center;
+  color: #4b1c1e; }
+
+.login-signup-container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 30vw; }
+
+.label-truck {
+  display: flex;
+  flex: row;
+  font-size: 3vw;
+  justify-content: space-around;
+  align-items: center;
+  color: #4b1c1e; }
+
+.label input {
+  margin-top: 1vh;
+  width: 30vw;
+  height: 3vh; }
+
+.label label {
+  font-size: 3vw;
+  color: #4b1c1e; }
+
+.error-message {
+  margin-top: 2vh;
+  font-size: 3vw; }
+
+.login-signin-button {
   background: none;
   border: none;
   font-size: 3vw;
   color: #6ec5ae;
   outline: none;
   font-weight: bold;
-  padding: 0vh 2vw; }
+  padding-bottom: 2vh; }
+
+.account-message {
+  font-size: 1.5vw;
+  margin-top: 2vh;
+  text-decoration: none;
+  color: #4b1c1e; }
+
+.account-message a {
+  text-decoration: none;
+  color: #6ec5ae; }
+
+.add-container {
+  margin-top: 7vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column; }
+
+.label-add {
+  display: flex;
+  flex-direction: column;
+  width: 30vw; }
+
+.adding-a-truck {
+  font-size: 4vw;
+  text-align: center;
+  color: #4b1c1e; }
+
+.btn-add-truck {
+  background: none;
+  border: none;
+  font-size: 2vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding: 1vh 0vw; }
+
+.label-add label {
+  font-size: 2.5vw;
+  color: #4b1c1e;
+  padding: 1vh 0vw; }
+
+.label-add select {
+  width: 30vw;
+  height: 2.5vh; }
+
+.label-add input {
+  width: 30vw;
+  height: 2.5vh; }
+
+.label-add p {
+  font-size: 2.5vw;
+  color: #4b1c1e; }
+
+.tags label {
+  font-size: 1.8vw;
+  color: #4b1c1e; }
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.tag {
+  display: flex;
+  flex: row;
+  align-items: center; }
+
+.edit-header {
+  font-size: 4vw; }
+
+.edit-container {
+  margin-top: 7vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column; }
+
+.btn-edit-truck {
+  background: none;
+  border: none;
+  font-size: 2vw;
+  color: #6ec5ae;
+  outline: none;
+  font-weight: bold;
+  padding: 1vh 0vw; }
+
+.label-edit {
+  display: flex;
+  flex-direction: column;
+  width: 30vw; }
+
+.label-edit label {
+  font-size: 2.5vw;
+  color: #4b1c1e;
+  padding: 1vh 0vw; }
+
+.label-edit p {
+  font-size: 2.5vw;
+  color: #4b1c1e;
+  padding: 1vh 0vw; }
+
+.label-edit input {
+  width: 30vw;
+  height: 2.5vh; }
 
 /*# sourceMappingURL=style.css.map */

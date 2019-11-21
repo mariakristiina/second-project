@@ -1,17 +1,24 @@
-<h2>Sign Up</h2>
+<div class="login-signup-container">
+<h1 class="login-signup">Sign Up</h1>
 
 <form action="/auth/signup" method="POST" id="form-container">
+
+<div class="label">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-
+  <input id="username" type="text" name="username" placeholder="">
+</div>
   <br><br>
 
+<div class="label">
   <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <input id="password" type="password" name="password" placeholder="">
   <br><br>
+  </div>
 
+<div class="label-truck">
   <label for="truck">I have a truck</label>
     <input type="checkbox" name="truck" value="true" id="truck">
+  </div>
   <br>
 
   {{#if message }}
@@ -20,6 +27,7 @@
 
   <br><br>
 
-  <button>Create an account</button>
+  <button class="login-signin-button">Create an account</button>
 
 </form>
+</div>

@@ -10,7 +10,7 @@ const truckSchema = new Schema({
   },
   cuisine: {
     type: String,
-    enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "Cocktails/drinks", "Asian Fusion", "Dessert", 'British'],
+    enum: ["Latin American", "Italian", "German", "Mediterranean", "Vietnamese", "Chinese", "American", "Cocktails/drinks", "Asian Fusion", "Dessert", 'British', "Coffee", "Mexican"],
     // required: true
   },
   // tags: {
