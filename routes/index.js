@@ -61,7 +61,8 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
     cuisine,
     tags,
     menu,
-    hours
+    hours,
+    image
   } = req.body;
 
   const location = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
@@ -79,6 +80,7 @@ router.post("/add-a-truck", loginCheck(), (req, res, next) => {
       locations: location,
       menu: menu,
       hours: hours,
+      image: image,
     })
     .then(() => {
       res.redirect("/truckProfile");
