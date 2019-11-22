@@ -50,10 +50,12 @@
           .then(data => {
             console.log("search result: ", data.data);
             console.log('user??? ', data.user)
-            if (!data.user) { return genericMarkersWithSearch(); }
 
+            console.log('FROM BACKEND data.data: ', data.data);
             const favoriteTrucks = data.data[0];
             const nonFavoriteTrucks = data.data[1];
+
+            if (!favoriteTrucks) { return genericMarkersWithSearch(); }
 
             nonFavoriteTrucks.forEach(x => {
               const markerDiv = document.createElement('div')
@@ -147,7 +149,7 @@
     const genericMarkersWithSearch = () => {
       console.log('function generic markers is called. Logged out')
       const searchText = document.getElementById('searchbar').value;
-      
+
       axios.get(`/api/${searchText}`).then(response => {
         console.log('NEW RESPONSE: ', response)
         response.data.forEach(x => {

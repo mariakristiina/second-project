@@ -245,14 +245,15 @@ router.post('/api/searchtext', (req, res) => {
   console.log(req.body.searchCheck)
 
   const searchText = req.body.searchCheck.join(' ')
-  console.log('BACKEBND KJHFJDHFDKJSHFDJKSF', searchText)
-  console.log('USER IS HEREEEEEEE?', req.user)
+
   if (req.user) {
+    console.log('USER IS HEREEEEEEE?', req.user)
     Truck.find({
         name: searchText
       })
       .then(response => {
         User.findById(req.user._id).then(user => {
+          console.log('USER', user);
           const favoriteSearchedTrucks = response.filter(truck => {
             if (user.likes.includes(truck._id)) {
               return true;
@@ -265,9 +266,11 @@ router.post('/api/searchtext', (req, res) => {
             }
             return true;
           })
+
+
           return [favoriteSearchedTrucks, nonfavoriteSearchedTrucks];
         }).then(newarray => {
-          console.log('backend result', response)
+          console.log('backend result', newarray)
           res.json(newarray);
         })
       })
