@@ -30,7 +30,7 @@
       });
     }
 
-    async function handlesubmit(e) {
+    function handlesubmit(e) {
       console.log('function called logged in?????')
       e.preventDefault()
       let test = document.querySelectorAll('.marker, .marker-favorite');
@@ -48,14 +48,16 @@
       else {
         axios.post(`/api/searchtext`, { searchCheck })
           .then(data => {
-            console.log("search result: ", data.data);
-            console.log('user??? ', data.user)
-            if (!data.user) { return genericMarkersWithSearch(); }
 
+            console.log('FROM BACKEND data.data: ', data.data);
+            if (!data.data[0]) { return genericMarkersWithSearch(); }
             const favoriteTrucks = data.data[0];
-            const nonFavoriteTrucks = data.data[1];
+            const nonFavoriteTrucks = data.data[1][0];
+
+            console.log('rendering non favorite markers')
 
             nonFavoriteTrucks.forEach(x => {
+              console.log('single truck here', x)
               const markerDiv = document.createElement('div')
               markerDiv.className = 'marker';
               new mapboxgl.Marker(markerDiv).setLngLat(x.locations)
@@ -73,9 +75,11 @@
                 .setPopup(new mapboxgl.Popup({ offset: 25, closeOnClick: true })
                   .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
                 .addTo(map);
-            })
+            });
+
           });
       }
+
     }
 
 
@@ -132,7 +136,9 @@
     const genericMarkers = () => {
       axios.get('/api/findtrucks').then(response => {
         console.log('THIS IS THE RESPONSE ', response);
-        response.data.forEach(x => {
+        const allTrucks = response.data.slice(1);
+        console.log(allTrucks);
+        allTrucks.forEach(x => {
           console.log(x);
           const markerDiv = document.createElement('div')
           markerDiv.className = 'marker';
@@ -147,9 +153,10 @@
     const genericMarkersWithSearch = () => {
       console.log('function generic markers is called. Logged out')
       const searchText = document.getElementById('searchbar').value;
+      const searchCheck = searchText.trim().split(' ')
 
-      axios.get(`/api/${searchText}`).then(response => {
-        console.log('NEW RESPONSE: ', response)
+      axios.get(`/api/searchtext`, { searchCheck }).then(response => {
+        console.log('NEW RESPONSE: ', response.data)
         response.data.forEach(x => {
 
           const markerDiv = document.createElement('div')
@@ -159,7 +166,7 @@
               .setHTML('<a href=/' + x._id + '/truck><h3>' + x.name + '</h3></a><p>' + x.cuisine + '</p>'))
             .addTo(map);
         })
-      })
+      });
     }
 
 

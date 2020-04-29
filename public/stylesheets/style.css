@@ -10,7 +10,7 @@ body {
   background-attachment: fixed; }
 
 a {
-  color: #00B7FF; }
+  color: #00b7ff; }
 
 .left a {
   padding-right: 2vw; }
@@ -32,9 +32,9 @@ a {
   cursor: pointer; }
 
 .marker {
-  background-image: url("https://www.sccpre.cat/mypng/full/0-8972_hexagym-yellow-map-marker-png.png");
+  background-image: url("../images/map-marker-2-yellow.png");
   background-size: cover;
-  width: 25px;
+  width: 35px;
   height: 36px;
   border-radius: 50%;
   cursor: pointer; }
